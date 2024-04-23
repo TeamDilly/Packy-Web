@@ -26,3 +26,33 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer components {
+    .font-h1 {
+        @apply font-bold text-[24px] leading-[34px];
+    }
+    .font-h2 {
+        @apply font-bold text-[18px] leading-[24px];
+    }
+    .font-h3 {
+        @apply font-medium text-[18px] leading-[27px];
+    }
+    .font-b1 {
+        @apply font-bold text-[16px] leading-[26px];
+    }
+    .font-b2 {
+        @apply font-normal text-[16px] leading-[26px];
+    }
+    .font-b3 {
+        @apply font-bold text-[14px] leading-[22px];
+    }
+    .font-b4 {
+        @apply font-normal text-[14px] leading-[22px];
+    }
+    .font-b5 {
+        @apply font-normal text-[14px] leading-[26px];
+    }
+    .font-b1 {
+        @apply font-normal text-[12px] leading-[20px];
+    }
+}
