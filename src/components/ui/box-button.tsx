@@ -7,7 +7,7 @@ import ProgressCircle from '@/components/icon/ProgressCircle'
 type BoxButtonProps = {
   buttonType: 'rect' | 'round'
   size: 'l' | 's' | 'm'
-  children: ReactNode
+  children?: ReactNode
   theme: 'default' | 'dark' | 'light'
   loading?: boolean
 } & ButtonHTMLAttributes<HTMLButtonElement>
@@ -41,7 +41,7 @@ export default function BoxButton({ buttonType, size, children, theme, loading =
   })
 
   return (
-    <button className={`${buttonClass} ${activeClass} ${disableClass}`} {...props}>
+    <button {...props} className={clsx(buttonClass, activeClass, disableClass, props?.className)}>
       <ProgressCircle
         data-testid='progress-circle'
         className={clsx('absolute left-0 right-0 m-auto animate-spin', { hidden: !loading })}
