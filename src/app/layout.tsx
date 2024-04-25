@@ -3,7 +3,7 @@ import './globals.css'
 import localFont from 'next/font/local'
 
 const myFont = localFont({
-  src: './font/PretendardVariable.woff2',
+  src: '../font/PretendardVariable.woff2',
   display: 'swap',
 })
 
