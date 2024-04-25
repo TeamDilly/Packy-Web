@@ -19,19 +19,19 @@ export default function BoxButton({ buttonType, size, children, theme, loading =
     'py-[8px] px-[24px] font-b6 rounded-[8px] transition-colors': size === 's',
     'bg-purple-500 text-white': theme === 'default',
     'bg-gray-900 text-white': theme === 'dark',
-    'bg-gary-100 text-black': theme === 'light',
+    'bg-gray-100 text-black': theme === 'light',
   })
 
   const activeClass = clsx({
-    'active:bg-purple-600': theme === 'default',
-    'active:bg-gray-800': theme === 'dark',
-    'active:bg-gray-300': theme === 'light',
+    'active:bg-purple-600': !props.disabled && theme === 'default',
+    'active:bg-gray-800': !props.disabled && theme === 'dark',
+    'active:bg-gray-300': !props.disabled && theme === 'light',
   })
 
   const disableClass = clsx({
-    'active:bg-purple-300': theme === 'default',
-    'active:bg-gray-300': theme === 'dark',
-    'active:bg-gray-100': theme === 'light',
+    'bg-purple-300 text-white': props.disabled && theme === 'default',
+    'bg-gray-300 text-white': props.disabled && theme === 'dark',
+    'bg-gray-100 text-gray-400': props.disabled && theme === 'light',
   })
 
   const contentClass = clsx('flex', {
