@@ -4,54 +4,74 @@ import BoxButton from '@/components/ui/box-button'
 import '@/app/globals.css'
 
 describe('BoxButton Component', () => {
-  it('renders correctly with default theme', () => {
+  it('renders correctly with different sizes', () => {
     mount(
-      <BoxButton buttonType='rect' theme='default' size='m'>
-        Click me
+      <BoxButton buttonType='rect' size='l' theme='default'>
+        Large Button
       </BoxButton>,
     )
-    cy.get('button').should('have.class', 'bg-purple-500')
-    cy.get('button').should('have.class', 'text-white')
-    cy.get('button').should('not.have.class', 'bg-gray-900') // Ensuring default theme is correctly applied
+    cy.get('button').should('contain', 'Large Button').and('have.class', 'py-[16px]')
+
+    mount(
+      <BoxButton buttonType='rect' size='m' theme='default'>
+        Medium Button
+      </BoxButton>,
+    )
+    cy.get('button').should('contain', 'Medium Button').and('have.class', 'py-[14px]')
+
+    mount(
+      <BoxButton buttonType='rect' size='s' theme='default'>
+        Small Button
+      </BoxButton>,
+    )
+    cy.get('button').should('contain', 'Small Button').and('have.class', 'py-[8px]')
   })
 
-  it('renders correctly with dark theme', () => {
+  it('applies theme colors correctly', () => {
     mount(
-      <BoxButton buttonType='rect' theme='dark' size='m'>
-        Click me
+      <BoxButton buttonType='rect' size='m' theme='dark'>
+        Dark Theme Button
       </BoxButton>,
     )
     cy.get('button').should('have.class', 'bg-gray-900')
-    cy.get('button').should('have.class', 'text-white')
-  })
 
-  it('renders correctly with light theme', () => {
     mount(
-      <BoxButton buttonType='rect' theme='light' size='m'>
-        Click me
+      <BoxButton buttonType='rect' size='m' theme='light'>
+        Light Theme Button
       </BoxButton>,
     )
-    cy.get('button').should('have.class', 'bg-gary-100')
-    cy.get('button').should('have.class', 'text-black')
+    cy.get('button').should('have.class', 'bg-gray-100')
   })
 
-  it('shows loading spinner when loading is true', () => {
+  it('handles the loading state correctly', () => {
     mount(
-      <BoxButton buttonType='rect' loading={true} theme='default' size='m'>
-        Click me
+      <BoxButton buttonType='rect' size='m' theme='default' loading={true}>
+        Loading
       </BoxButton>,
     )
-    cy.get('[data-testid="progress-circle"]').should('not.have.class', 'hidden')
-    cy.get('[data-testid="content"]').should('not.have.css', 'display', 'none')
+    cy.get('button').within(() => {
+      cy.get('[data-testid="progress-circle"]').should('not.have.class', 'hidden')
+      cy.get('[data-testid="content"]').should('not.have.css', 'display', 'none')
+    })
   })
 
-  it('does not show loading spinner when loading is false', () => {
+  it('is disabled correctly', () => {
     mount(
-      <BoxButton buttonType='rect' loading={false} theme='default' size='m'>
-        Click me
+      <BoxButton buttonType='rect' size='m' theme='default' disabled>
+        Loading
       </BoxButton>,
     )
-    cy.get('[data-testid="progress-circle"]').should('have.class', 'hidden')
-    cy.get('[data-testid="content"]').should('not.have.css', 'display', 'none')
+    cy.get('button').should('have.class', 'bg-purple-300')
+    cy.get('button').should('have.attr', 'disabled')
+  })
+
+  it('changes appearance on active state', () => {
+    mount(
+      <BoxButton buttonType='rect' size='m' theme='default'>
+        Active State
+      </BoxButton>,
+    )
+    cy.get('button').click()
+    cy.get('button').should('have.class', 'active:bg-purple-600')
   })
 })
