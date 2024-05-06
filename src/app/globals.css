@@ -28,30 +28,30 @@ body {
 
 @layer components {
     .font-h1 {
-        @apply font-bold text-[24px] leading-[34px];
+        @apply font-bold text-2xl/[2.125rem];
     }
     .font-h2 {
-        @apply font-bold text-[18px] leading-[24px];
+        @apply font-bold text-lg/6;
     }
     .font-h3 {
-        @apply font-medium text-[18px] leading-[27px];
+        @apply font-medium text-lg/[1.688rem];
     }
     .font-b1 {
-        @apply font-bold text-[16px] leading-[26px];
+        @apply font-bold text-base/[1.625rem];
     }
     .font-b2 {
-        @apply font-normal text-[16px] leading-[26px];
+        @apply font-normal text-base/[1.625rem];
     }
     .font-b3 {
-        @apply font-bold text-[14px] leading-[22px];
+        @apply font-bold text-sm/[1.375rem];
     }
     .font-b4 {
-        @apply font-normal text-[14px] leading-[22px];
+        @apply font-normal text-sm/[1.375rem];
     }
     .font-b5 {
-        @apply font-normal text-[14px] leading-[26px];
+        @apply font-normal text-sm/[1.625rem];
     }
     .font-b1 {
-        @apply font-normal text-[12px] leading-[20px];
+        @apply font-normal text-xs/5;
     }
 }
