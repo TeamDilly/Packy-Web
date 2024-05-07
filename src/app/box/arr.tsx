@@ -4,7 +4,7 @@ import { MouseEventHandler } from 'react'
 
 type BoxOutsideProps = { sender: string; boxName: string; onOpenClick: MouseEventHandler }
 
-export default function BoxOutside({ sender, boxName, onOpenClick }: BoxOutsideProps) {
+export default function BoxArr({ sender, boxName, onOpenClick }: BoxOutsideProps) {
   return (
     <div className='container mx-auto box-border flex h-[calc(100dvh-4rem)] flex-col items-center justify-between px-6 py-4'>
       <div className='container mx-auto my-auto flex flex-col items-center'>

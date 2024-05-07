@@ -1,8 +1,9 @@
 'use client'
 import { useState } from 'react'
-import BoxOutside from '@/app/box/outside'
-import BoxInside from '@/app/box/inside'
+import BoxDetail from '@/app/box/detail'
 import Banner from '@/app/box/banner'
+import Timer from '@/app/box/timer'
+import BoxArr from '@/app/box/arr'
 
 export default function Box() {
   const sender = '밀리'
@@ -17,13 +18,14 @@ export default function Box() {
     <>
       {opened ? (
         <>
+          <Timer />
           <Banner />
-          <BoxInside />
+          <BoxDetail />
         </>
       ) : (
         <>
           <Banner />
-          <BoxOutside sender={sender} boxName={boxName} onOpenClick={onOpenClick} />
+          <BoxArr sender={sender} boxName={boxName} onOpenClick={onOpenClick} />
         </>
       )}
     </>
