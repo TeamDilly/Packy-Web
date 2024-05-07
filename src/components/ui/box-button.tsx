@@ -14,9 +14,9 @@ type BoxButtonProps = {
 
 export default function BoxButton({ buttonType, size, children, theme, loading = false, ...props }: BoxButtonProps) {
   const buttonClass = clsx('relative', {
-    'py-[16px] px-[24px] font-b2 rounded-[16px] transition-colors': size === 'l',
-    'py-[14px] px-[24px] font-b4 rounded-[8px] transition-colors': size === 'm',
-    'py-[8px] px-[24px] font-b6 rounded-[8px] transition-colors': size === 's',
+    'py-4 px-6 font-b2 rounded-2xl transition-colors': size === 'l',
+    'py-[0.875rem] px-6 font-b4 rounded-lg transition-colors': size === 'm',
+    'py-2 px-6 font-b6 rounded-lg transition-colors': size === 's',
     'bg-purple-500 text-white': theme === 'default',
     'bg-gray-900 text-white': theme === 'dark',
     'bg-gray-100 text-black': theme === 'light',
@@ -35,9 +35,9 @@ export default function BoxButton({ buttonType, size, children, theme, loading =
   })
 
   const contentClass = clsx('flex', {
-    'space-x-[12px]': size === 'l',
-    'space-x-[8px]': size === 'm',
-    'space-x-[4px]': size === 's',
+    'space-x-3': size === 'l',
+    'space-x-2': size === 'm',
+    'space-x-1': size === 's',
   })
 
   return (
