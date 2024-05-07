@@ -4,8 +4,7 @@ import BoxDetail from '@/app/box/detail'
 import Banner from '@/app/box/banner'
 import Timer from '@/app/box/timer'
 import BoxArr from '@/app/box/arr'
-import BoxOpen1 from '@/lottie/Box_motion_arr_1.json'
-import Lottie from 'lottie-react'
+import OpenMotion from '@/app/box/open-motion'
 
 export default function Box() {
   const sender = '밀리'
@@ -14,6 +13,10 @@ export default function Box() {
 
   const onOpenClick = () => {
     setOpened('opening')
+  }
+
+  const onOpenComplete = () => {
+    setOpened('opened')
   }
 
   return (
@@ -27,7 +30,7 @@ export default function Box() {
       ) : opened === 'opening' ? (
         <>
           <Banner />
-          <Lottie animationData={BoxOpen1} loop={false} onComplete={() => setOpened('opened')} />
+          <OpenMotion onComplete={onOpenComplete} />
         </>
       ) : (
         <>
