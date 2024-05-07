@@ -12,16 +12,6 @@ export default function Box() {
   const boxName = '이호의생일을축하합니다요'
   const [opened, setOpened] = useState<'closed' | 'opening' | 'opened'>('closed')
 
-  // const options: LottieOptions = {
-  //   animationData: BoxOpen1,
-  //   loop: false,
-  //   onComplete: () => {
-  //     setOpened('opened')
-  //   },
-  // }
-  //
-  // const { View } = useLottie(options)
-
   const onOpenClick = () => {
     setOpened('opening')
   }
