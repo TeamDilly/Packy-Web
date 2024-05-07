@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import BoxOutside from '@/app/box/outside'
 import BoxInside from '@/app/box/inside'
+import Banner from '@/app/box/banner'
 
 export default function Box() {
   const sender = '밀리'
@@ -12,9 +13,19 @@ export default function Box() {
     setOpened(true)
   }
 
-  if (opened) {
-    return <BoxInside />
-  } else {
-    return <BoxOutside sender={sender} boxName={boxName} onOpenClick={onOpenClick} />
-  }
+  return (
+    <>
+      {opened ? (
+        <>
+          <Banner />
+          <BoxInside />
+        </>
+      ) : (
+        <>
+          <Banner />
+          <BoxOutside sender={sender} boxName={boxName} onOpenClick={onOpenClick} />
+        </>
+      )}
+    </>
+  )
 }
