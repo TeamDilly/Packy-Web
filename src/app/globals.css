@@ -51,7 +51,7 @@ body {
     .font-b5 {
         @apply font-normal text-sm/[1.625rem];
     }
-    .font-b1 {
-        @apply font-normal text-xs/5;
+    .font-b6 {
+        @apply font-normal text-xs/[1.125rem];
     }
 }
