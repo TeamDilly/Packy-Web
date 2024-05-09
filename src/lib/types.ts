@@ -582,7 +582,7 @@ export interface GetGiftBoxesParams {
    * 마지막 선물박스의 giftBoxDate
    * @example "2024-12-31T00:00:00.000"
    */
-  lastGiftBoxDate?: timestamp
+  lastGiftBoxDate?: string
   /** 선물박스 상태, default는 all */
   type?: 'sent' | 'received' | 'all'
   /** 한 페이지에 보여줄 선물박스 개수. 기본값은 6개 */
