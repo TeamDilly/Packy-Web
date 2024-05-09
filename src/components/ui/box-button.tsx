@@ -14,9 +14,9 @@ type BoxButtonProps = {
 
 export default function BoxButton({ buttonType, size, children, theme, loading = false, ...props }: BoxButtonProps) {
   const buttonClass = clsx('relative', {
-    'py-4 px-6 font-b2 rounded-2xl transition-colors': size === 'l',
-    'py-[0.875rem] px-6 font-b4 rounded-lg transition-colors': size === 'm',
-    'py-2 px-6 font-b6 rounded-lg transition-colors': size === 's',
+    'py-4 px-6 font-b2 transition-colors': size === 'l',
+    'py-[0.875rem] px-6 font-b4 transition-colors': size === 'm',
+    'py-2 px-6 font-b6 transition-colors': size === 's',
     'bg-purple-500 text-white': theme === 'default',
     'bg-gray-900 text-white': theme === 'dark',
     'bg-gray-100 text-black': theme === 'light',
@@ -40,8 +40,14 @@ export default function BoxButton({ buttonType, size, children, theme, loading =
     'space-x-1': size === 's',
   })
 
+  const buttenTypeClass = clsx({
+    'rounded-full': buttonType === 'round',
+    'rounded-2xl': buttonType === 'rect' && size === 'l',
+    'rounded-lg': buttonType === 'rect' && (size === 'm' || size === 's'),
+  })
+
   return (
-    <button {...props} className={clsx(buttonClass, activeClass, disableClass, props?.className)}>
+    <button {...props} className={clsx(buttonClass, activeClass, disableClass, buttenTypeClass, props?.className)}>
       <ProgressCircle
         data-testid='progress-circle'
         className={clsx('absolute left-0 right-0 m-auto animate-spin', { hidden: !loading })}
