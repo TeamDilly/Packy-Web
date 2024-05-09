@@ -7,14 +7,14 @@ const fetcher = async (...args: Parameters<typeof fetch>): Promise<any> => {
 }
 
 export function useBox(id: string) {
-  const { data, error, isLoading } = useSWR<OpenGiftBoxForWebData>(
+  const { data, error, isLoading } = useSWR<OpenGiftBoxForWebData, Error>(
     `${process.env.NEXT_PUBLIC_API_URL}/giftboxes/web/${id}`,
     fetcher,
   )
 
   return {
-    data: data?.data,
+    data: data,
     isLoading,
-    isError: error,
+    error: error,
   }
 }

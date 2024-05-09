@@ -693,3 +693,6 @@ export type GetEnvelopesData = DataResponseDtoListEnvelopeListResponse
 export type GetBoxesData = DataResponseDtoListBoxImgResponse
 
 export type WithdrawData = DataResponseDtoString
+
+export const GIFTBOX_URL_EXPIRED = 'GIFTBOX_URL_EXPIRED'
+export const GIFTBOX_NOT_FOUND = 'GIFTBOX_NOT_FOUND'
