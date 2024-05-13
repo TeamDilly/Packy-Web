@@ -14,9 +14,12 @@ function Loading() {
   return <h1>로딩중</h1>
 }
 
+const expired = 'a11ab8e3-a068-498c-a415-487964cad3d5'
+const normal = 'ae4154a0-67ad-4991-b560-d67b5c6bfd8f'
+
 export default function Box() {
   const [opened, setOpened] = useState<'closed' | 'opening' | 'opened'>('closed')
-  const { data, isLoading, error } = useBox('77ce6d27-d7fb-4aeb-b712-948225b3636f')
+  const { data, isLoading, error } = useBox(normal)
 
   const onOpenClick = () => setOpened('opening')
   const onOpenComplete = () => setOpened('opened')
@@ -31,13 +34,9 @@ export default function Box() {
 
   return (
     <>
+      {opened === 'opened' && <Timer />}
       <Banner />
-      {opened === 'opened' && (
-        <>
-          <Timer />
-          <BoxDetail />
-        </>
-      )}
+      {opened === 'opened' && <BoxDetail box={data.data} />}
       {opened === 'opening' && <OpenMotion onComplete={onOpenComplete} />}
       {opened === 'closed' && data && <BoxArr box={data.data} onOpenClick={onOpenClick} />}
     </>
