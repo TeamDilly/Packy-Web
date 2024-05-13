@@ -11,47 +11,47 @@
 
 export interface GiftBoxRequest {
   /** @example "너를 위해 준비했어" */
-  name?: string
+  name: string
   /** @example "보내는 사람" */
-  senderName?: string
+  senderName: string
   /** @example "받는 사람" */
-  receiverName?: string
+  receiverName: string
   /**
    * @format int64
    * @example 1
    */
-  boxId?: number
+  boxId: number
   /**
    * @format int64
    * @example 1
    */
-  envelopeId?: number
+  envelopeId: number
   /** @example "생일 축하해~" */
-  letterContent?: string
+  letterContent: string
   /** @example "https://www.youtube.com" */
-  youtubeUrl?: string
-  photos?: PhotoRequest[]
-  stickers?: StickerRequest[]
-  gift?: GiftRequest
+  youtubeUrl: string
+  photos: PhotoRequest[]
+  stickers: StickerRequest[]
+  gift: GiftRequest
 }
 
 export interface GiftRequest {
   /** @example "photo" */
-  type?: string
+  type: string
   /** @example "www.example.com" */
-  url?: string
+  url: string
 }
 
 export interface PhotoRequest {
   /** @example "www.test.com" */
-  photoUrl?: string
+  photoUrl: string
   /** @example "우리 같이 놀러갔던 날 :)" */
-  description?: string
+  description: string
   /**
    * @format int32
    * @example 1
    */
-  sequence?: number
+  sequence: number
 }
 
 export interface StickerRequest {
@@ -59,18 +59,18 @@ export interface StickerRequest {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /**
    * @format int32
    * @example 1
    */
-  location?: number
+  location: number
 }
 
 export interface DataResponseDtoGiftBoxIdResponse {
-  code?: string
-  message?: string
-  data?: GiftBoxIdResponse
+  code: string
+  message: string
+  data: GiftBoxIdResponse
 }
 
 export interface GiftBoxIdResponse {
@@ -78,31 +78,31 @@ export interface GiftBoxIdResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /** @example "550e8400-e29b-41d4-a716-446655440000" */
-  uuid?: string
+  uuid: string
   /** @example "www.example.com" */
-  kakaoMessageImgUrl?: string
+  kakaoMessageImgUrl: string
 }
 
 export interface SignupRequest {
   /** @example "kakao" */
-  provider?: string
+  provider: string
   /** @example "짱제이" */
-  nickname?: string
+  nickname: string
   /**
    * @format int64
    * @example 1
    */
-  profileImg?: number
-  pushNotification?: boolean
-  marketingAgreement?: boolean
+  profileImg: number
+  pushNotification: boolean
+  marketingAgreement: boolean
 }
 
 export interface DataResponseDtoJwtResponse {
-  code?: string
-  message?: string
-  data?: JwtResponse
+  code: string
+  message: string
+  data: JwtResponse
 }
 
 export interface JwtResponse {
@@ -110,41 +110,41 @@ export interface JwtResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /** @example "Bearer" */
-  grantType?: string
+  grantType: string
   /** @example "eyJhbGciOiJIUzUxMiJ9..." */
-  accessToken?: string
+  accessToken: string
   /** @example "eyJhbGciOiJIUzUxMiJ9..." */
-  refreshToken?: string
+  refreshToken: string
   /**
    * @format int64
    * @example 1705651413
    */
-  accessTokenExpiresIn?: number
+  accessTokenExpiresIn: number
 }
 
 export interface JwtRequest {
   /** @example "eyJhbGciOiJIUzUxMiJ9..." */
-  accessToken?: string
+  accessToken: string
   /** @example "eyJhbGciOiJIUzUxMiJ9..." */
-  refreshToken?: string
+  refreshToken: string
 }
 
 export interface ProfileRequest {
   /** @example "제2" */
-  nickname?: string
+  nickname: string
   /**
    * @format int64
    * @example 1
    */
-  profileImg?: number
+  profileImg: number
 }
 
 export interface DataResponseDtoProfileResponse {
-  code?: string
-  message?: string
-  data?: ProfileResponse
+  code: string
+  message: string
+  data: ProfileResponse
 }
 
 export interface ProfileResponse {
@@ -152,30 +152,30 @@ export interface ProfileResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /** @example "kakao" */
-  provider?: string
+  provider: string
   /** @example "짱제이" */
-  nickname?: string
+  nickname: string
   /** @example "www.example.com" */
-  imgUrl?: string
+  imgUrl: string
 }
 
 export interface DeliverStatusRequest {
   /** @example "DELIVERED" */
-  deliverStatus?: string
+  deliverStatus: string
 }
 
 export interface DataResponseDtoString {
-  code?: string
-  message?: string
-  data?: string
+  code: string
+  message: string
+  data: string
 }
 
 export interface DataResponseDtoStatusResponse {
-  code?: string
-  message?: string
-  data?: StatusResponse
+  code: string
+  message: string
+  data: StatusResponse
 }
 
 export interface StatusResponse {
@@ -183,17 +183,17 @@ export interface StatusResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /** @example true */
-  isAvailable?: boolean
+  isAvailable: boolean
   /** @example "NEED_UPDATE" */
-  reason?: 'INVALID_STATUS' | 'NEED_UPDATE'
+  reason: 'INVALID_STATUS' | 'NEED_UPDATE'
 }
 
 export interface DataResponseDtoSliceResponseDtoPhotoWithoutSequenceResponse {
-  code?: string
-  message?: string
-  data?: SliceResponseDtoPhotoWithoutSequenceResponse
+  code: string
+  message: string
+  data: SliceResponseDtoPhotoWithoutSequenceResponse
 }
 
 export interface PhotoWithoutSequenceResponse {
@@ -201,23 +201,23 @@ export interface PhotoWithoutSequenceResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /** @example "www.example.com" */
-  photoUrl?: string
+  photoUrl: string
   /** @example "우리 같이 트리 만든 날 :)" */
-  description?: string
+  description: string
 }
 
 export interface SliceResponseDtoPhotoWithoutSequenceResponse {
-  content?: PhotoWithoutSequenceResponse[]
-  first?: boolean
-  last?: boolean
+  content: PhotoWithoutSequenceResponse[]
+  first: boolean
+  last: boolean
 }
 
 export interface DataResponseDtoSliceResponseDtoMusicResponse {
-  code?: string
-  message?: string
-  data?: SliceResponseDtoMusicResponse
+  code: string
+  message: string
+  data: SliceResponseDtoMusicResponse
 }
 
 export interface MusicResponse {
@@ -225,33 +225,33 @@ export interface MusicResponse {
    * @format int64
    * @example 1
    */
-  giftBoxId?: number
+  giftBoxId: number
   /** @example "www.example.com" */
-  youtubeUrl?: string
+  youtubeUrl: string
 }
 
 export interface SliceResponseDtoMusicResponse {
-  content?: MusicResponse[]
-  first?: boolean
-  last?: boolean
+  content: MusicResponse[]
+  first: boolean
+  last: boolean
 }
 
 export interface DataResponseDtoSliceResponseDtoLetterResponse {
-  code?: string
-  message?: string
-  data?: SliceResponseDtoLetterResponse
+  code: string
+  message: string
+  data: SliceResponseDtoLetterResponse
 }
 
 export interface EnvelopeResponse {
   /** @example "www.example.com" */
-  imgUrl?: string
+  imgUrl: string
   /** @example "ED76A5" */
-  borderColorCode?: string
+  borderColorCode: string
   /**
    * @format int32
    * @example 30
    */
-  opacity?: number
+  opacity: number
 }
 
 export interface LetterResponse {
@@ -259,29 +259,29 @@ export interface LetterResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /** @example "이 편지는 영국에서 시작되어..." */
-  letterContent?: string
-  envelope?: EnvelopeResponse
+  letterContent: string
+  envelope: EnvelopeResponse
 }
 
 export interface SliceResponseDtoLetterResponse {
-  content?: LetterResponse[]
-  first?: boolean
-  last?: boolean
+  content: LetterResponse[]
+  first: boolean
+  last: boolean
 }
 
 export interface DataResponseDtoSliceResponseDtoItemResponse {
-  code?: string
-  message?: string
-  data?: SliceResponseDtoItemResponse
+  code: string
+  message: string
+  data: SliceResponseDtoItemResponse
 }
 
 export interface GiftResponse {
   /** @example "photo" */
-  type?: string
+  type: string
   /** @example "www.example.com" */
-  url?: string
+  url: string
 }
 
 export interface ItemResponse {
@@ -289,20 +289,20 @@ export interface ItemResponse {
    * @format int64
    * @example 1
    */
-  giftBoxId?: number
-  gift?: GiftResponse
+  giftBoxId: number
+  gift: GiftResponse
 }
 
 export interface SliceResponseDtoItemResponse {
-  content?: ItemResponse[]
-  first?: boolean
-  last?: boolean
+  content: ItemResponse[]
+  first: boolean
+  last: boolean
 }
 
 export interface DataResponseDtoSliceResponseDtoGiftBoxesResponse {
-  code?: string
-  message?: string
-  data?: SliceResponseDtoGiftBoxesResponse
+  code: string
+  message: string
+  data: SliceResponseDtoGiftBoxesResponse
 }
 
 export interface GiftBoxesResponse {
@@ -310,25 +310,25 @@ export interface GiftBoxesResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /** @example "sent" */
-  type?: string
+  type: string
   /** @example "보내는사람" */
-  sender?: string
+  sender: string
   /** @example "받는사람" */
-  receiver?: string
+  receiver: string
   /** @example "최고의선물박스" */
-  name?: string
+  name: string
   /** @format date-time */
-  giftBoxDate?: string
+  giftBoxDate: string
   /** @example "www.example.com" */
-  boxNormal?: string
+  boxNormal: string
 }
 
 export interface SliceResponseDtoGiftBoxesResponse {
-  content?: GiftBoxesResponse[]
-  first?: boolean
-  last?: boolean
+  content: GiftBoxesResponse[]
+  first: boolean
+  last: boolean
 }
 
 export interface BoxResponse {
@@ -336,70 +336,70 @@ export interface BoxResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /** @example "www.example.com" */
-  boxNormal?: string
+  boxNormal: string
   /** @example "www.example.com" */
-  boxTop?: string
+  boxTop: string
 }
 
 export interface DataResponseDtoGiftBoxResponse {
-  code?: string
-  message?: string
-  data?: GiftBoxResponse
+  code: string
+  message: string
+  data: GiftBoxResponse
 }
 
 export interface GiftBoxResponse {
   /** @example "오늘을 위한 특별한 생일 선물" */
-  name?: string
+  name: string
   /** @example "제이" */
-  senderName?: string
+  senderName: string
   /** @example "밀리밀리밀리" */
-  receiverName?: string
-  box?: BoxResponse
-  envelope?: EnvelopeResponse
+  receiverName: string
+  box: BoxResponse
+  envelope: EnvelopeResponse
   /** @example "생일 축하해~" */
-  letterContent?: string
+  letterContent: string
   /** @example "https://www.youtube.com" */
-  youtubeUrl?: string
-  photos?: PhotoResponse[]
-  stickers?: StickerResponse[]
-  gift?: GiftResponse
+  youtubeUrl: string
+  photos: PhotoResponse[]
+  stickers: StickerResponse[]
+  gift: GiftResponse
 }
 
 export interface PhotoResponse {
   /** @example "www.example.com" */
-  photoUrl?: string
+  photoUrl: string
   /** @example "우리 같이 트리 만든 날 :)" */
-  description?: string
+  description: string
   /**
    * @format int32
    * @example 1
    */
-  sequence?: number
+  sequence: number
 }
 
 export interface StickerResponse {
-  imgUrl?: string
+  imgUrl: string
   /** @format int32 */
-  location?: number
+  location: number
 }
 
 export interface DataResponseDtoKakaoImgResponse {
-  code?: string
-  message?: string
-  data?: KakaoImgResponse
+  code: string
+  message: string
+  data: KakaoImgResponse
 }
 
 export interface KakaoImgResponse {
   /** @example "www.example.com" */
-  kakaoMessageImgUrl?: string
+  kakaoMessageImgUrl: string
 }
 
 export interface DataResponseDtoListWaitingGiftBoxResponse {
-  code?: string
-  message?: string
-  data?: WaitingGiftBoxResponse[]
+  code: string
+  message: string
+  data: WaitingGiftBoxResponse[]
 }
 
 export interface WaitingGiftBoxResponse {
@@ -407,40 +407,40 @@ export interface WaitingGiftBoxResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /** @example "선물박스 이름" */
-  name?: string
+  name: string
   /** @example "받는 사람 이름" */
-  receiverName?: string
+  receiverName: string
   /** @format date-time */
-  createdAt?: string
+  createdAt: string
   /** @example "www.example.com" */
-  smallImgUrl?: string
+  smallImgUrl: string
 }
 
 export interface DataResponseDtoMainGiftBoxResponse {
-  code?: string
-  message?: string
-  data?: MainGiftBoxResponse
+  code: string
+  message: string
+  data: MainGiftBoxResponse
 }
 
 export interface MainGiftBoxResponse {
   /** @format int64 */
-  giftBoxId?: number
-  name?: string
-  senderName?: string
-  normalImgUrl?: string
+  giftBoxId: number
+  name: string
+  senderName: string
+  normalImgUrl: string
 }
 
 export interface DataResponseDtoFileRequest {
-  code?: string
-  message?: string
-  data?: FileRequest
+  code: string
+  message: string
+  data: FileRequest
 }
 
 export interface FileRequest {
   /**
-   * @example "https://examplebucket.s3.amazonaws.com /test.txt?
+   * @example "https://examplebucket.s3.amazonaws.com /test.txt
    * X-Amz-Algorithm=AWS4-HMAC-SHA256
    * &X-Amz-Credential=<YOUR_ACCESS_KEY_ID>/20160115/ap-northeast-2/s3/aws4_request&
    * &X-Amz-Date=20160115T000000Z
@@ -448,46 +448,46 @@ export interface FileRequest {
    * &X-Amz-SignedHeaders=host
    * &X-Amz-Signature=<SIGNATURE_VALUE>"
    */
-  url?: string
+  url: string
 }
 
 export interface DataResponseDtoSignInResponse {
-  code?: string
-  message?: string
-  data?: SignInResponse
+  code: string
+  message: string
+  data: SignInResponse
 }
 
 export interface SignInResponse {
   /** @example "NOT_REGISTERED" */
-  status?: 'NOT_REGISTERED' | 'REGISTERED' | 'WITHDRAWAL' | 'BLACKLIST'
+  status: 'NOT_REGISTERED' | 'REGISTERED' | 'WITHDRAWAL' | 'BLACKLIST'
   /** @example "짱제이" */
-  nickname?: string
-  tokenInfo?: JwtResponse
+  nickname: string
+  tokenInfo: JwtResponse
 }
 
 export interface DataResponseDtoListSettingResponse {
-  code?: string
-  message?: string
-  data?: SettingResponse[]
+  code: string
+  message: string
+  data: SettingResponse[]
 }
 
 export interface SettingResponse {
   /** @example "OFFICIAL_SNS" */
-  tag?: string
+  tag: string
   /** @example "www.example.com" */
-  url?: string
+  url: string
 }
 
 export interface DataResponseDtoListMusicResponse {
-  code?: string
-  message?: string
-  data?: MusicResponse[]
+  code: string
+  message: string
+  data: MusicResponse[]
 }
 
 export interface DataResponseDtoSliceResponseDtoImgResponse {
-  code?: string
-  message?: string
-  data?: SliceResponseDtoImgResponse
+  code: string
+  message: string
+  data: SliceResponseDtoImgResponse
 }
 
 export interface ImgResponse {
@@ -495,32 +495,32 @@ export interface ImgResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /**
    * @format int64
    * @example 1
    */
-  sequence?: number
+  sequence: number
   /** @example "www.example.com" */
-  imgUrl?: string
+  imgUrl: string
 }
 
 export interface SliceResponseDtoImgResponse {
-  content?: ImgResponse[]
-  first?: boolean
-  last?: boolean
+  content: ImgResponse[]
+  first: boolean
+  last: boolean
 }
 
 export interface DataResponseDtoListImgResponse {
-  code?: string
-  message?: string
-  data?: ImgResponse[]
+  code: string
+  message: string
+  data: ImgResponse[]
 }
 
 export interface DataResponseDtoListEnvelopeListResponse {
-  code?: string
-  message?: string
-  data?: EnvelopeListResponse[]
+  code: string
+  message: string
+  data: EnvelopeListResponse[]
 }
 
 export interface EnvelopeListResponse {
@@ -528,26 +528,26 @@ export interface EnvelopeListResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /**
    * @format int64
    * @example 1
    */
-  sequence?: number
-  envelope?: EnvelopePaperResponse
-  letter?: EnvelopePaperResponse
+  sequence: number
+  envelope: EnvelopePaperResponse
+  letter: EnvelopePaperResponse
   /** @example "www.example.com" */
-  imgUrl?: string
+  imgUrl: string
 }
 
 export interface EnvelopePaperResponse {
   /** @example "ED76A5" */
-  borderColorCode?: string
+  borderColorCode: string
   /**
    * @format int32
    * @example 30
    */
-  opacity?: number
+  opacity: number
 }
 
 export interface BoxImgResponse {
@@ -555,26 +555,26 @@ export interface BoxImgResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /**
    * @format int64
    * @example 1
    */
-  sequence?: number
+  sequence: number
   /** @example "www.example.com" */
-  boxNormal?: string
+  boxNormal: string
   /** @example "www.example.com" */
-  boxSmall?: string
+  boxSmall: string
   /** @example "www.example.com" */
-  boxSet?: string
+  boxSet: string
   /** @example "www.example.com" */
-  boxTop?: string
+  boxTop: string
 }
 
 export interface DataResponseDtoListBoxImgResponse {
-  code?: string
-  message?: string
-  data?: BoxImgResponse[]
+  code: string
+  message: string
+  data: BoxImgResponse[]
 }
 
 export interface GetGiftBoxesParams {
@@ -582,11 +582,11 @@ export interface GetGiftBoxesParams {
    * 마지막 선물박스의 giftBoxDate
    * @example "2024-12-31T00:00:00.000"
    */
-  lastGiftBoxDate?: string
+  lastGiftBoxDate: string
   /** 선물박스 상태, default는 all */
-  type?: 'sent' | 'received' | 'all'
+  type: 'sent' | 'received' | 'all'
   /** 한 페이지에 보여줄 선물박스 개수. 기본값은 6개 */
-  size?: number
+  size: number
 }
 
 export type GetGiftBoxesData = DataResponseDtoSliceResponseDtoGiftBoxesResponse
@@ -616,36 +616,36 @@ export type GetStatusData = DataResponseDtoStatusResponse
 
 export interface GetPhotosParams {
   /** 마지막 사진의 id */
-  'last-photo-id'?: number
+  'last-photo-id': number
   /** 한 페이지에 보여줄 사진 개수. 기본값은 6개 */
-  size?: number
+  size: number
 }
 
 export type GetPhotosData = DataResponseDtoSliceResponseDtoPhotoWithoutSequenceResponse
 
 export interface GetMusicsParams {
   /** 마지막 음악이 담긴 선물박스의 id */
-  'last-giftbox-id'?: number
+  'last-giftbox-id': number
   /** 한 페이지에 보여줄 음악 개수. 기본값은 6개 */
-  size?: number
+  size: number
 }
 
 export type GetMusicsData = DataResponseDtoSliceResponseDtoMusicResponse
 
 export interface GetLettersParams {
   /** 마지막 편지의 id */
-  'last-letter-id'?: number
+  'last-letter-id': number
   /** 한 페이지에 보여줄 편지 개수. 기본값은 6개 */
-  size?: number
+  size: number
 }
 
 export type GetLettersData = DataResponseDtoSliceResponseDtoLetterResponse
 
 export interface GetItemsParams {
   /** 마지막 선물이 담긴 선물박스의 id */
-  'last-giftbox-id'?: number
+  'last-giftbox-id': number
   /** 한 페이지에 보여줄 선물 개수. 기본값은 6개 */
-  size?: number
+  size: number
 }
 
 export type GetItemsData = DataResponseDtoSliceResponseDtoItemResponse
@@ -679,9 +679,9 @@ export type HealthCheckData = DataResponseDtoString
 
 export interface GetStickersParams {
   /** 마지막 스티커 ID */
-  lastStickerId?: number
+  lastStickerId: number
   /** 한 페이지에 보여줄 스티커 개수. 기본값은 10개 */
-  size?: number
+  size: number
 }
 
 export type GetStickersData = DataResponseDtoSliceResponseDtoImgResponse
