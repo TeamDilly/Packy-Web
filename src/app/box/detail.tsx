@@ -2,6 +2,7 @@ import Image from 'next/image'
 import { GiftBoxResponse } from '@/lib/types'
 import PhotoCard from '@/components/box/photo-card'
 import Sticker from '@/components/box/sticker'
+import LetterCard from '@/components/box/letter-card'
 
 export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
   return (
@@ -20,6 +21,11 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
           <Sticker
             className='absolute left-0 top-[calc(100dvh*0.43)] w-[calc(100vw*0.28)] -rotate-[10deg]'
             src={box.stickers[0].imgUrl}
+          />
+          <LetterCard
+            letterContent={box.letterContent}
+            src={box.envelope.imgUrl}
+            className='absolute right-0 top-[calc(100dvh*0.41)] h-[calc(100vw*0.46*0.833)] w-[calc(100vw*0.46)] rotate-3'
           />
         </div>
 
