@@ -54,3 +54,50 @@ body {
         @apply font-normal text-xs/[1.125rem];
     }
 }
+
+@layer utilities {
+    @media (min-aspect-ratio: 320/578) {
+        .photo-card-width {
+            width: 36vw;
+        }
+
+        .sticker-width {
+            width: 24vw;
+        }
+
+        .letter-card-width {
+            width: 40vw;
+            height: calc(40vw*0.833)
+        }
+    }
+
+    @media (max-aspect-ratio: 320/578) and (min-aspect-ratio: 390/772) {
+        .photo-card-width {
+            width: 38.5vw;
+        }
+
+        .sticker-width {
+            width: 26vw;
+        }
+
+        .letter-card-width {
+            width: 43vw;
+            height: calc(43vw*0.833)
+        }
+    }
+
+    @media (max-aspect-ratio: 390/772) {
+        .photo-card-width {
+            width: 41vw;
+        }
+
+        .sticker-width {
+            width: 28vw;
+        }
+
+        .letter-card-width {
+            width: 46vw;
+            height: calc(46vw*0.833)
+        }
+    }
+}
