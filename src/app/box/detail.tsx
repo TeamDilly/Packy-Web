@@ -7,7 +7,7 @@ import LetterCard from '@/components/box/letter-card'
 export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
   return (
     <>
-      <div className='container relative -z-50 mx-auto box-border flex h-dvh flex-col bg-[#303030] px-8'>
+      <div className='container relative -z-50 mx-auto box-border flex h-[calc(100dvh-6.125rem)] flex-col overflow-x-hidden overflow-y-scroll bg-[#303030] px-8'>
         <p className='font-b2 relative mt-8 self-start text-white'>From. {box.senderName}</p>
         <div className='container relative mx-auto mt-8 grid h-full grid-cols-2 grid-rows-3 place-items-center'>
           <PhotoCard

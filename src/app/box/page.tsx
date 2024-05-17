@@ -33,12 +33,12 @@ export default function Box() {
   if (data.data === undefined) throw new Error()
 
   return (
-    <>
+    <div className='container overflow-y-hidden'>
       {opened === 'opened' && <Timer />}
       <Banner />
       {opened === 'opened' && <BoxDetail box={data.data} />}
       {opened === 'opening' && <OpenMotion onComplete={onOpenComplete} />}
       {opened === 'closed' && data && <BoxArr box={data.data} onOpenClick={onOpenClick} />}
-    </>
+    </div>
   )
 }
