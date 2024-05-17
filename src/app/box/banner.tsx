@@ -12,12 +12,12 @@ export default function Banner() {
           width={40}
           height={40}
         />
-        <div className='flex flex-col'>
+        <div className='flex flex-col text-nowrap '>
           <p className='font-b6 text-gray-700'>선물박스 평생 보관하려면?</p>
           <p className='font-b4 text-gray-900'>앱 다운받고 선물박스 저장하기</p>
         </div>
       </div>
-      <BoxButton buttonType='rect' size='s' theme='dark' className='px-4'>
+      <BoxButton buttonType='rect' size='s' theme='dark' className='text-nowrap px-4'>
         다운로드
       </BoxButton>
     </div>
