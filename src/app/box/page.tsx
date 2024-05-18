@@ -33,7 +33,7 @@ export default function Box() {
   if (data.data === undefined) throw new Error()
 
   return (
-    <div className='container overflow-y-hidden'>
+    <div className='container'>
       {opened === 'opened' && <Timer />}
       <Banner />
       {opened === 'opened' && <BoxDetail box={data.data} />}
