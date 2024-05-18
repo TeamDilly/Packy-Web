@@ -9,7 +9,7 @@ export default function BoxExpired() {
           이 선물박스는 열 수 없어요
         </h1>
         <p className='font-b4 break-inline text-balance break-keep text-center text-gray-800'>
-          선물박스는 한 명만 열 수 있어요.
+          선물박스를 열어볼 수 있는 기간이 지났어요.
           <br />
           선물박스의 주인이라면 패키에게 문의해주세요.
         </p>

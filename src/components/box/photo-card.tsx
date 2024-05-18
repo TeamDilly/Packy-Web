@@ -1,10 +1,21 @@
 import clsx from 'clsx'
 import Image from 'next/image'
+import { MouseEventHandler } from 'react'
 
-export default function PhotoCard({ src, className }: { src: string; className?: string }) {
+export default function PhotoCard({
+  src,
+  alt,
+  onClick,
+  className,
+}: {
+  src: string
+  alt: string
+  onClick?: MouseEventHandler<HTMLButtonElement>
+  className?: string
+}) {
   return (
-    <div className={clsx('bg-white p-1.5 pb-[1.75rem]', className)}>
-      <Image src={src} alt='선물 사진' width={500} height={500} />
-    </div>
+    <button type='button' className={clsx('bg-white p-1.5 pb-[1.75rem]', className)} onClick={onClick}>
+      <Image src={src} alt={alt} width={500} height={500} />
+    </button>
   )
 }

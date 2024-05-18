@@ -3,7 +3,7 @@ import BoxButton from '@/components/ui/box-button'
 
 export default function Banner() {
   return (
-    <div className='sticky z-50 flex justify-between bg-gray-100 px-4 py-3'>
+    <div className='sticky z-40 flex justify-between bg-gray-100 px-4 py-3'>
       <div className='flex space-x-2'>
         <Image
           className='rounded-lg'
