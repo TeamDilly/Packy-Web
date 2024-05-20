@@ -49,7 +49,7 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
               letterContent={box.letterContent}
               src={box.envelope.imgUrl}
               onClick={openLetter}
-              className='letter-card-width'
+              className='letter-card-width rotate-3'
             />
             <MusicPlayer className='col-span-2 place-self-start' url={box.youtubeUrl} />
           </div>
