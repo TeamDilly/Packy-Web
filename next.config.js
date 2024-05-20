@@ -1,6 +1,6 @@
 const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
-/** @type {import('next').NextConfig} */
 
+/** @type {import('next').NextConfig} */
 const config = {
   images: {
     remotePatterns: [
@@ -17,6 +17,7 @@ const config = {
 module.exports = (phase, { defaultConfig }) => {
   if (phase === PHASE_DEVELOPMENT_SERVER) {
     return {
+      ...defaultConfig,
       ...config,
       async rewrites() {
         return [
@@ -27,5 +28,10 @@ module.exports = (phase, { defaultConfig }) => {
         ]
       },
     }
+  }
+
+  return {
+    ...defaultConfig,
+    ...config,
   }
 }
