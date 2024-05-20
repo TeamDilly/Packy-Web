@@ -8,13 +8,8 @@ type OpenMotion = {
 
 export default function OpenMotion({ onComplete }: OpenMotion) {
   return (
-    <div className='container relative h-[calc(100dvh-4rem)] overflow-hidden'>
-      <Lottie
-        animationData={BoxOpen1}
-        loop={false}
-        onComplete={onComplete}
-        style={{ position: 'absolute', top: '-1rem', left: 0, width: '100%' }}
-      />
+    <div className='container absolute flex h-[calc(100dvh-4rem)] items-center justify-center overflow-visible'>
+      <Lottie animationData={BoxOpen1} loop={false} onComplete={onComplete} style={{ width: '100%' }} />
     </div>
   )
 }

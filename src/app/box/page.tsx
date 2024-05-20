@@ -15,13 +15,16 @@ function Loading() {
 }
 
 const expired = 'a11ab8e3-a068-498c-a415-487964cad3d5'
-const normal = 'ae4154a0-67ad-4991-b560-d67b5c6bfd8f'
+const normal = '336721b8-123b-46f8-9c94-a41d1126091d'
 
 export default function Box() {
-  const [opened, setOpened] = useState<'closed' | 'opening' | 'opened'>('closed')
+  const [opened, setOpened] = useState<'closed' | 'opening' | 'opened' | 'fading'>('closed')
   const { data, isLoading, error } = useBox(normal)
 
-  const onOpenClick = () => setOpened('opening')
+  const onOpenClick = () => {
+    setOpened('fading')
+    setTimeout(() => setOpened('opening'), 300)
+  }
   const onOpenComplete = () => setOpened('opened')
 
   if (isLoading) return <Loading />
@@ -37,8 +40,10 @@ export default function Box() {
       {opened === 'opened' && <Timer />}
       <Banner />
       {opened === 'opened' && <BoxDetail box={data.data} />}
-      {opened === 'opening' && <OpenMotion onComplete={onOpenComplete} />}
-      {opened === 'closed' && data && <BoxArr box={data.data} onOpenClick={onOpenClick} />}
+      {(opened === 'opening' || opened === 'fading') && <OpenMotion onComplete={onOpenComplete} />}
+      {(opened === 'closed' || opened === 'fading') && data && (
+        <BoxArr box={data.data} onOpenClick={onOpenClick} opened={opened} />
+      )}
     </div>
   )
 }
