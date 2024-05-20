@@ -40,7 +40,7 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
             <PhotoCard
               className='photo-card-width h-auto -rotate-3'
               alt={box.photos[0].description}
-              src={box.photos[0].photoUrl}
+              src={'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_1%401x.png'}
               onClick={openPhoto}
             />
             <Sticker className='sticker-width ml-8 rotate-[10deg]' src={box.stickers[0].imgUrl} />
@@ -49,7 +49,7 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
               letterContent={box.letterContent}
               src={box.envelope.imgUrl}
               onClick={openLetter}
-              className='letter-card-width rotate-3'
+              className='letter-card-width'
             />
             <MusicPlayer className='col-span-2 place-self-start' url={box.youtubeUrl} />
           </div>
@@ -64,7 +64,12 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
       </div>
       <Modal isOpen={modalStatus === 'photo'} onRequestClose={closeModal} style={photoModalStyles} ariaHideApp={false}>
         <div className='font-b4 flex w-[calc(100vw-5rem)] flex-col space-y-4 p-4 text-gray-900'>
-          <Image src={box.photos[0].photoUrl} alt={box.photos[0].description} width={500} height={500} />
+          <Image
+            src={'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_1%401x.png'}
+            alt={box.photos[0].description}
+            width={500}
+            height={500}
+          />
           <p className='py-3 text-center'>{box.photos[0].description}</p>
         </div>
       </Modal>
