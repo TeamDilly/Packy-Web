@@ -7,6 +7,7 @@ import MusicPlayer from '@/components/box/music-player'
 import Modal from 'react-modal'
 import useModal from '@/lib/hooks/box/detail/use-modal'
 
+// Define the animation in your global CSS or styled-components
 const customStyles = {
   content: {
     top: '50%',
@@ -19,9 +20,10 @@ const customStyles = {
   },
   overlay: {
     padding: '2.5rem',
-    backdropFilter: 'blur(5px)',
+    backdropFilter: 'blur(0px)',
     zIndex: 50,
     backgroundColor: 'rgba(0,0,0,0.44)',
+    animation: 'fadein_blur .5s forwards',
   },
 }
 
@@ -33,7 +35,7 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
 
   return (
     <>
-      <div className='container relative'>
+      <div className='item-fadein container relative'>
         <div className='container relative z-30 mx-auto box-border flex h-[calc(100dvh-6.125rem)] flex-col overflow-x-hidden overflow-y-scroll bg-[#303030] px-8'>
           <p className='font-b2 relative mt-8 self-start text-white'>From. {box.senderName}</p>
           <div className='container relative mx-auto mt-8 grid h-full grid-cols-2 grid-rows-3 place-items-center'>
@@ -63,7 +65,7 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
         />
       </div>
       <Modal isOpen={modalStatus === 'photo'} onRequestClose={closeModal} style={photoModalStyles} ariaHideApp={false}>
-        <div className='font-b4 flex w-[calc(100vw-5rem)] flex-col space-y-4 p-4 text-gray-900'>
+        <div className={'font-b4 flex w-[calc(100vw-5rem)] flex-col space-y-4 p-4 text-gray-900'}>
           <Image
             src={'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_1%401x.png'}
             alt={box.photos[0].description}

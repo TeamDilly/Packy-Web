@@ -117,13 +117,13 @@ body {
     }
 }
 
-.item-fading {
-    -webkit-animation: fadein .3s linear forwards;
-    animation: fadein .3s linear forwards;
+.item-fadein {
+    -webkit-animation: fadein .3s forwards;
+    animation: fadein .3s forwards;
 }
 .item-fadeout{
-    -webkit-animation: fadeout .3s linear forwards;
-    animation: fadeout .3s linear forwards;
+    -webkit-animation: fadeout .3s forwards;
+    animation: fadeout .3s forwards;
 }
 
 @-webkit-keyframes fadein {
@@ -144,4 +144,15 @@ body {
 @keyframes fadeout {
     0% { opacity: 1; }
     100% { opacity: 0; }
+}
+
+@keyframes fadein_blur {
+    0% {
+        opacity: 0;
+        backdrop-filter: blur(0px);
+    }
+    100% {
+        opacity: 1;
+        backdrop-filter: blur(5px);
+    }
 }
