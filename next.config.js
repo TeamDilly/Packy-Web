@@ -6,6 +6,10 @@ const config = {
     remotePatterns: [
       {
         protocol: 'https',
+        hostname: '**',
+      },
+      {
+        protocol: 'https',
         hostname: 'packy-bucket.s3.ap-northeast-2.amazonaws.com',
         port: '',
         pathname: '/**',

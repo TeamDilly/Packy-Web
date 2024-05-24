@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import 'react-responsive-modal/styles.css'
 import localFont from 'next/font/local'
 
 const myFont = localFont({

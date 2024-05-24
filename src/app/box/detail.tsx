@@ -4,65 +4,12 @@ import PhotoCard from '@/components/box/photo-card'
 import Sticker from '@/components/box/sticker'
 import LetterCard from '@/components/box/letter-card'
 import MusicPlayer from '@/components/box/music-player'
-import Modal from 'react-modal'
 import useModal from '@/lib/hooks/box/detail/use-modal'
 import BoxButton from '@/components/ui/box-button'
-import { useState } from 'react'
-
-// Define the animation in your global CSS or styled-components
-const customStyles = {
-  content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
-    padding: 0,
-  },
-  overlay: {
-    padding: '2.5rem',
-    backdropFilter: 'blur(0px)',
-    zIndex: 50,
-    backgroundColor: 'rgba(0,0,0,0.44)',
-  },
-}
-
-const photoModalFadeinStyles = {
-  ...customStyles,
-  content: { ...customStyles.content, borderRadius: 0 },
-  overlay: { ...customStyles.overlay, animation: 'fadein_blur .5s forwards' },
-}
-const photoModalFadeoutStyles = {
-  ...customStyles,
-  content: { ...customStyles.content, borderRadius: 0 },
-  overlay: { ...customStyles.overlay, animation: 'fadeout_blur .5s forwards' },
-}
+import Modal from 'react-responsive-modal'
 
 export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
-  const [openGift, setOpenGift] = useState(false)
-  const { modalStatus, openPhoto, openLetter, handleClose } = useModal()
-
-  const letterModalFadeinStyles = {
-    ...customStyles,
-    content: {
-      ...customStyles.content,
-      borderRadius: '1rem',
-      borderWidth: '0.25rem',
-      borderColorCode: box.envelope.borderColorCode,
-    },
-    overlay: { ...customStyles.overlay, animation: 'fadein_blur .5s forwards' },
-  }
-  const letterModalFadeoutStyles = {
-    ...customStyles,
-    content: {
-      ...customStyles.content,
-      borderRadius: '1rem',
-      borderWidth: '0.25rem',
-      borderColorCode: box.envelope.borderColorCode,
-    },
-    overlay: { ...customStyles.overlay, animation: 'fadeout_blur .5s forwards' },
-  }
+  const { modalStatus, openPhoto, openLetter, openGift, closeModal } = useModal()
 
   return (
     <>
@@ -96,38 +43,67 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
         />
       </div>
       <Modal
-        isOpen={modalStatus === 'photo' || modalStatus === 'photo-closing'}
-        onRequestClose={handleClose}
-        style={modalStatus === 'photo-closing' ? photoModalFadeoutStyles : photoModalFadeinStyles}
-        ariaHideApp={false}
+        open={modalStatus === 'photo'}
+        onClose={closeModal}
+        center
+        showCloseIcon={false}
+        styles={{ overlay: { backdropFilter: 'blur(4px)' }, modal: { margin: '2.5rem', padding: 0 } }}
       >
-        <div className={'font-b4 flex w-[calc(100vw-5rem)] flex-col space-y-4 p-4 text-gray-900'}>
-          <Image
-            src={'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_1%401x.png'}
-            alt={box.photos[0].description}
-            width={500}
-            height={500}
-          />
+        <div className={'font-b4 flex flex-col space-y-4 p-4 text-gray-900'}>
+          <Image src={box.photos[0].photoUrl} alt={box.photos[0].description} width={500} height={500} />
           <p className='py-3 text-center'>{box.photos[0].description}</p>
         </div>
       </Modal>
       <Modal
-        isOpen={modalStatus === 'letter' || modalStatus === 'letter-closing'}
-        onRequestClose={handleClose}
-        style={modalStatus === 'letter-closing' ? letterModalFadeoutStyles : letterModalFadeinStyles}
-        ariaHideApp={false}
+        open={modalStatus === 'letter'}
+        onClose={closeModal}
+        center
+        showCloseIcon={false}
+        styles={{
+          overlay: { backdropFilter: 'blur(4px)' },
+          modal: {
+            width: '-webkit-fill-available',
+            margin: '1.5rem',
+            padding: 0,
+            borderRadius: '1rem',
+            borderWidth: 4,
+            borderColor: `#${box.envelope.borderColorCode}`,
+          },
+        }}
       >
-        <div
-          className={`font-b4 flex min-h-[280px] w-[calc(100vw-3rem)] items-center justify-center text-center text-gray-900`}
-        >
+        <div className={`font-b4 flex min-h-[280px] w-full items-center justify-center text-center text-gray-900`}>
           {box.letterContent}
+        </div>
+      </Modal>
+      <Modal
+        open={modalStatus === 'gift'}
+        onClose={closeModal}
+        center
+        showCloseIcon={false}
+        styles={{
+          overlay: { backgroundColor: '#222222' },
+          modal: { margin: '2.5rem', padding: 0 },
+        }}
+      >
+        <div className={'font-b4 flex flex-col space-y-4 bg-gray-950 p-5'}>
+          <div style={{ position: 'relative', width: '64vw', height: '64vw' }}>
+            <Image
+              src={box.gift.url}
+              alt='선물 기프트카드'
+              fill
+              sizes='64vw'
+              style={{
+                objectFit: 'none',
+              }}
+            />
+          </div>
         </div>
       </Modal>
       <BoxButton
         buttonType='round'
         size='m'
         theme='light'
-        onClick={() => setOpenGift(true)}
+        onClick={openGift}
         className='absolute bottom-20 left-1/2 z-50 -translate-x-1/2 transform bg-white'
       >
         선물 확인하기

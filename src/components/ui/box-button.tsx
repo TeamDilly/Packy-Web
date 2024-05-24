@@ -47,7 +47,11 @@ export default function BoxButton({ buttonType, size, children, theme, loading =
   })
 
   return (
-    <button {...props} className={clsx(buttonClass, activeClass, disableClass, buttenTypeClass, props?.className)}>
+    <button
+      type='button'
+      {...props}
+      className={clsx(buttonClass, activeClass, disableClass, buttenTypeClass, props?.className)}
+    >
       <ProgressCircle
         data-testid='progress-circle'
         className={clsx('absolute left-0 right-0 m-auto animate-spin', { hidden: !loading })}
