@@ -38,20 +38,31 @@ const photoModalFadeoutStyles = {
   content: { ...customStyles.content, borderRadius: 0 },
   overlay: { ...customStyles.overlay, animation: 'fadeout_blur .5s forwards' },
 }
-const letterModalFadeinStyles = {
-  ...customStyles,
-  content: { ...customStyles.content, borderRadius: '1rem' },
-  overlay: { ...customStyles.overlay, animation: 'fadein_blur .5s forwards' },
-}
-const letterModalFadeoutStyles = {
-  ...customStyles,
-  content: { ...customStyles.content, borderRadius: '1rem' },
-  overlay: { ...customStyles.overlay, animation: 'fadeout_blur .5s forwards' },
-}
 
 export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
   const [openGift, setOpenGift] = useState(false)
   const { modalStatus, openPhoto, openLetter, handleClose } = useModal()
+
+  const letterModalFadeinStyles = {
+    ...customStyles,
+    content: {
+      ...customStyles.content,
+      borderRadius: '1rem',
+      borderWidth: '0.25rem',
+      borderColorCode: box.envelope.borderColorCode,
+    },
+    overlay: { ...customStyles.overlay, animation: 'fadein_blur .5s forwards' },
+  }
+  const letterModalFadeoutStyles = {
+    ...customStyles,
+    content: {
+      ...customStyles.content,
+      borderRadius: '1rem',
+      borderWidth: '0.25rem',
+      borderColorCode: box.envelope.borderColorCode,
+    },
+    overlay: { ...customStyles.overlay, animation: 'fadeout_blur .5s forwards' },
+  }
 
   return (
     <>
@@ -106,7 +117,9 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
         style={modalStatus === 'letter-closing' ? letterModalFadeoutStyles : letterModalFadeinStyles}
         ariaHideApp={false}
       >
-        <div className='font-b4 flex min-h-[280px] w-[calc(100vw-3rem)] items-center justify-center text-center text-gray-900'>
+        <div
+          className={`font-b4 flex min-h-[280px] w-[calc(100vw-3rem)] items-center justify-center text-center text-gray-900`}
+        >
           {box.letterContent}
         </div>
       </Modal>
