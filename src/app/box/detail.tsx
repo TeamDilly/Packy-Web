@@ -82,11 +82,12 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
         showCloseIcon={false}
         styles={{
           overlay: { backgroundColor: '#222222' },
-          modal: { margin: '2.5rem', padding: 0 },
+          modal: { margin: '2.5rem', padding: 0, overflow: 'visible' },
         }}
       >
-        <div className={'font-b4 flex flex-col space-y-4 bg-gray-950 p-5'}>
-          <div style={{ position: 'relative', width: '64vw', height: '64vw' }}>
+        <div className='font-b4 relative flex flex-col bg-gray-950 p-5'>
+          <div className='absolute left-1/2 top-0 h-[16vw] w-[16vw] -translate-x-1/2 -translate-y-1/4 transform rounded-full bg-gray-950' />
+          <div className='relative h-[64vw] w-[64vw]'>
             <Image
               src={box.gift.url}
               alt='선물 기프트카드'
@@ -94,9 +95,11 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
               sizes='64vw'
               style={{
                 objectFit: 'none',
+                zIndex: 100,
               }}
             />
           </div>
+          <div className='absolute bottom-0 left-1/2 h-[16vw] w-[16vw] -translate-x-1/2 translate-y-1/4 transform rounded-full bg-gray-950' />
         </div>
       </Modal>
       <BoxButton
