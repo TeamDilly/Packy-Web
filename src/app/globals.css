@@ -59,7 +59,8 @@ body {
 @layer utilities {
     @media (min-aspect-ratio: 320/578) {
         .photo-card-width {
-            width: 36vw;
+            width: 32vw;
+            height: 32vw;
         }
 
         .sticker-width {
@@ -79,7 +80,8 @@ body {
 
     @media (max-aspect-ratio: 320/578) and (min-aspect-ratio: 390/772) {
         .photo-card-width {
-            width: 38.5vw;
+            width: 32.5vw;
+            height: 32.5vw;
         }
 
         .sticker-width {
@@ -99,7 +101,8 @@ body {
 
     @media (max-aspect-ratio: 390/772) {
         .photo-card-width {
-            width: 41vw;
+            width: 37vw;
+            height: 37vw;
         }
 
         .sticker-width {

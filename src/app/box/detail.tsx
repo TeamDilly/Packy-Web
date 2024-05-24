@@ -21,9 +21,9 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
           <p className='font-b2 relative mt-8 self-start text-white'>From. {box.senderName}</p>
           <div className='container relative mx-auto mt-8 grid h-full grid-cols-2 grid-rows-3 place-items-center'>
             <PhotoCard
-              className='photo-card-width h-auto -rotate-3'
+              className='-rotate-3'
               alt={box.photos[0].description}
-              src={'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_1%401x.png'}
+              src={box.photos[0].photoUrl}
               onClick={() => openModal('photo')}
             />
             <Sticker className='sticker-width ml-8 rotate-[10deg]' src={box.stickers[0].imgUrl} />

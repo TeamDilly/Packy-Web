@@ -15,7 +15,16 @@ export default function PhotoCard({
 }) {
   return (
     <button type='button' className={cn('bg-white p-1.5 pb-[1.75rem]', className)} onClick={onClick}>
-      <Image src={src} alt={alt} width={500} height={500} />
+      <div className='photo-card-width relative'>
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          style={{
+            objectFit: 'cover',
+          }}
+        />
+      </div>
     </button>
   )
 }
