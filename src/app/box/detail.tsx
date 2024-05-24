@@ -9,7 +9,7 @@ import BoxButton from '@/components/ui/box-button'
 import Modal from 'react-responsive-modal'
 
 export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
-  const { modalStatus, openPhoto, openLetter, openGift, closeModal } = useModal()
+  const { modalStatus, openPhoto, openLetter, openGift, openGiftFull, closeModal } = useModal()
 
   return (
     <>
@@ -76,7 +76,7 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
         </div>
       </Modal>
       <Modal
-        open={modalStatus === 'gift'}
+        open={modalStatus === 'gift' || modalStatus === 'gift-full'}
         onClose={closeModal}
         center
         showCloseIcon={false}
@@ -92,23 +92,40 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
               src={box.gift.url}
               alt='선물 기프트카드'
               fill
-              sizes='64vw'
+              sizes='63vw'
               style={{
                 objectFit: 'none',
                 zIndex: 100,
+                objectPosition: 'top',
               }}
             />
             <BoxButton
               buttonType='round'
               size='s'
               theme='dark'
-              onClick={openGift}
+              onClick={openGiftFull}
               className='absolute bottom-4 left-1/2 z-[110] -translate-x-1/2 transform text-nowrap bg-opacity-30'
             >
               이미지 전체보기
             </BoxButton>
           </div>
           <div className='absolute bottom-0 left-1/2 h-[16vw] w-[16vw] -translate-x-1/2 translate-y-1/4 transform rounded-full bg-gray-950' />
+        </div>
+      </Modal>
+      <Modal
+        open={modalStatus === 'gift-full'}
+        onClose={openGift}
+        center
+        showCloseIcon={false}
+        styles={{
+          overlay: { backgroundColor: '#171717' },
+          modal: { margin: '2.5rem', padding: 0, overflow: 'visible' },
+        }}
+      >
+        <div className='font-b4 relative flex flex-col'>
+          <div className='relative h-auto w-[70vw]'>
+            <Image src={box.gift.url} alt='선물 기프트카드' width={500} height={500} />
+          </div>
         </div>
       </Modal>
       <BoxButton

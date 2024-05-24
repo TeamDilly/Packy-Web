@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-type ModalStatus = 'closed' | 'photo' | 'letter' | 'gift'
+type ModalStatus = 'closed' | 'photo' | 'letter' | 'gift' | 'gift-full'
 
 export default function useModal() {
   const [modalStatus, setModalStatus] = useState<ModalStatus>('closed')
@@ -17,9 +17,13 @@ export default function useModal() {
     setModalStatus('gift')
   }
 
+  const openGiftFull = () => {
+    setModalStatus('gift-full')
+  }
+
   const closeModal = () => {
     setModalStatus('closed')
   }
 
-  return { modalStatus, openPhoto, openLetter, openGift, closeModal }
+  return { modalStatus, openPhoto, openLetter, openGift, openGiftFull, closeModal }
 }
