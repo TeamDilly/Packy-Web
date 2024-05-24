@@ -64,15 +64,17 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
         openFull={() => openModal('gift-full')}
       />
       <GiftFullModal giftUrl={box.gift.url} isOpen={modalStatus === 'gift-full'} onClose={() => openModal('gift')} />
-      <BoxButton
-        buttonType='round'
-        size='m'
-        theme='light'
-        onClick={() => openModal('gift')}
-        className='absolute bottom-5 left-1/2 z-50 -translate-x-1/2 transform bg-white'
-      >
-        선물 확인하기
-      </BoxButton>
+      {box.gift?.url && (
+        <BoxButton
+          buttonType='round'
+          size='m'
+          theme='light'
+          onClick={() => openModal('gift')}
+          className='absolute bottom-5 left-1/2 z-50 -translate-x-1/2 transform bg-white'
+        >
+          선물 확인하기
+        </BoxButton>
+      )}
     </>
   )
 }
