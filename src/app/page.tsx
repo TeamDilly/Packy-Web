@@ -1,32 +1,65 @@
 'use client'
-import React, { useState } from 'react'
+import { Suspense, useState } from 'react'
+import BoxDetail from '@/app/detail'
+import Banner from '@/app/banner'
+import Timer from '@/app/timer'
+import BoxArr from '@/app/arr'
+import OpenMotion from '@/app/open-motion'
+import { useBox } from '@/lib/fetchers'
+import BoxExpired from '@/app/expired'
+import { GIFTBOX_NOT_FOUND, GIFTBOX_URL_EXPIRED } from '@/lib/types'
+import { notFound } from 'next/navigation'
+import Loading from '@/app/loading'
 
-export default function Home() {
-  const [theme, setTheme] = useState<'default' | 'light'>('default')
+type BoxStatus = 'closed' | 'opening' | 'opened' | 'fading'
+
+type BoxProps = {
+  id: string
+  opened: BoxStatus
+  onOpenClick: () => void
+  onOpenComplete: () => void
+}
+
+function Box({ id, opened, onOpenClick, onOpenComplete }: BoxProps) {
+  const { data, isLoading, error } = useBox(id)
+
+  if (isLoading) return <Loading />
+  if (data === undefined || error) throw error
+
+  if (data.code === GIFTBOX_URL_EXPIRED) return <BoxExpired />
+  else if (data.code === GIFTBOX_NOT_FOUND) notFound()
+
+  if (data.data === undefined) throw new Error()
 
   return (
-    <main className='flex min-h-dvh flex-col items-center justify-between p-24'>
-      <p className='font-h1'>hello</p>
-      <p className='font-h2'>hello</p>
-      <p className='font-h3'>hello</p>
-      <p className='font-b1'>hello</p>
-      <p className='font-b2'>hello</p>
-      <p className='font-b3'>hello</p>
-      <p className='font-b4'>hello</p>
-      <p className='font-b5'>hello</p>
-      <p className='font-b6'>hello</p>
-      {/*<BoxButton buttonType='rect' size='l' theme={theme}>*/}
-      {/*  hello*/}
-      {/*</BoxButton>*/}
+    <>
+      {opened === 'opened' && <Timer />}
+      <Banner />
+      {opened === 'opened' && <BoxDetail box={data.data} />}
+      {(opened === 'opening' || opened === 'fading') && <OpenMotion onComplete={onOpenComplete} />}
+      {(opened === 'closed' || opened === 'fading') && data && (
+        <BoxArr box={data.data} onOpenClick={onOpenClick} opened={opened} />
+      )}
+    </>
+  )
+}
 
-      {/*<BoxButton*/}
-      {/*  buttonType='rect'*/}
-      {/*  size='l'*/}
-      {/*  theme='light'*/}
-      {/*  onClick={() => setTheme(prev => (prev === 'default' ? 'light' : 'default'))}*/}
-      {/*>*/}
-      {/*  change*/}
-      {/*</BoxButton>*/}
-    </main>
+export default function Page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+  const id = searchParams['box']
+  if (typeof id !== 'string') notFound()
+  const [opened, setOpened] = useState<BoxStatus>('closed')
+
+  const onOpenClick = () => {
+    setOpened('fading')
+    setTimeout(() => setOpened('opening'), 300)
+  }
+  const onOpenComplete = () => setOpened('opened')
+
+  return (
+    <div className='container'>
+      <Suspense fallback={<Loading />}>
+        <Box id={id} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />
+      </Suspense>
+    </div>
   )
 }
