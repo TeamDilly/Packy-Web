@@ -1,6 +1,6 @@
-import clsx from 'clsx'
 import Image from 'next/image'
 import { MouseEventHandler } from 'react'
+import { cn } from '@/lib/util'
 
 export default function PhotoCard({
   src,
@@ -14,7 +14,7 @@ export default function PhotoCard({
   className?: string
 }) {
   return (
-    <button type='button' className={clsx('bg-white p-1.5 pb-[1.75rem]', className)} onClick={onClick}>
+    <button type='button' className={cn('bg-white p-1.5 pb-[1.75rem]', className)} onClick={onClick}>
       <Image src={src} alt={alt} width={500} height={500} />
     </button>
   )

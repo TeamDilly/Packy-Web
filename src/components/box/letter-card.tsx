@@ -1,6 +1,6 @@
 import Image from 'next/image'
-import clsx from 'clsx'
 import { MouseEventHandler } from 'react'
+import { cn } from '@/lib/util'
 
 export default function LetterCard({
   letterContent,
@@ -14,7 +14,7 @@ export default function LetterCard({
   className: string
 }) {
   return (
-    <button type='button' className={clsx(className, 'relative')} onClick={onClick}>
+    <button type='button' className={cn(className, 'relative')} onClick={onClick}>
       <div
         className={
           'font-b6 absolute inset-0 h-[87.5%] w-[87.5%] overflow-hidden rounded-lg bg-white px-2.5 py-1.5 text-gray-900'

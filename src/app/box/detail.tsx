@@ -87,7 +87,7 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
       >
         <div className='font-b4 relative flex flex-col bg-gray-950 p-5'>
           <div className='absolute left-1/2 top-0 h-[16vw] w-[16vw] -translate-x-1/2 -translate-y-1/4 transform rounded-full bg-gray-950' />
-          <div className='relative h-[64vw] w-[64vw]'>
+          <div className='relative h-[63vw] w-[63vw]'>
             <Image
               src={box.gift.url}
               alt='선물 기프트카드'
@@ -98,6 +98,15 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
                 zIndex: 100,
               }}
             />
+            <BoxButton
+              buttonType='round'
+              size='s'
+              theme='dark'
+              onClick={openGift}
+              className='absolute bottom-4 left-1/2 z-[110] -translate-x-1/2 transform text-nowrap bg-opacity-30'
+            >
+              이미지 전체보기
+            </BoxButton>
           </div>
           <div className='absolute bottom-0 left-1/2 h-[16vw] w-[16vw] -translate-x-1/2 translate-y-1/4 transform rounded-full bg-gray-950' />
         </div>
@@ -107,7 +116,7 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
         size='m'
         theme='light'
         onClick={openGift}
-        className='absolute bottom-20 left-1/2 z-50 -translate-x-1/2 transform bg-white'
+        className='absolute bottom-5 left-1/2 z-50 -translate-x-1/2 transform bg-white'
       >
         선물 확인하기
       </BoxButton>

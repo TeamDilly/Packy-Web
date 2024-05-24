@@ -2,14 +2,14 @@ import Image from 'next/image'
 import BoxButton from '@/components/ui/box-button'
 import { MouseEventHandler } from 'react'
 import { GiftBoxResponse } from '@/lib/types'
-import clsx from 'clsx'
+import { cn } from '@/lib/util'
 
 type BoxArrProps = { box: GiftBoxResponse; onOpenClick: MouseEventHandler; opened: 'closed' | 'fading' }
 
 export default function BoxArr({ box, onOpenClick, opened }: BoxArrProps) {
   return (
     <div
-      className={clsx(
+      className={cn(
         { 'item-fadeout': opened === 'fading' },
         'item-fadein container relative mx-auto flex h-[calc(100dvh-4rem)] flex-col items-center justify-between px-6 py-4',
       )}
