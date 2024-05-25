@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { GiftBoxResponse } from '@/lib/types'
+import { GiftBoxResponse, StickerResponse } from '@/lib/types'
 import PhotoCard from '@/components/box/photo-card'
 import Sticker from '@/components/box/sticker'
 import LetterCard from '@/components/box/letter-card'
@@ -14,6 +14,8 @@ import PhotoModal from '@/components/box/photo-modal'
 export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
   const { modalStatus, openModal, closeModal } = useModal()
 
+  const stickers: (StickerResponse | null)[] = [null, null]
+  box.stickers.forEach(sticker => (stickers[sticker.location - 1] = sticker))
   return (
     <>
       <div className='item-fadein container relative'>
@@ -26,8 +28,17 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
               src={box.photos[0].photoUrl}
               onClick={() => openModal('photo')}
             />
-            <Sticker className='sticker-width ml-8 rotate-[10deg]' src={box.stickers[0].imgUrl} />
-            <Sticker className='sticker-width mr-8 -rotate-[10deg]' src={box.stickers[0].imgUrl} />
+            {stickers[0] !== null ? (
+              <Sticker className='sticker-width ml-8 rotate-[10deg]' src={box.stickers[0].imgUrl} />
+            ) : (
+              <div />
+            )}
+            {stickers[1] !== null ? (
+              <Sticker className='sticker-width mr-8 -rotate-[10deg]' src={box.stickers[1].imgUrl} />
+            ) : (
+              <div />
+            )}
+
             <LetterCard
               letterContent={box.letterContent}
               src={box.envelope.imgUrl}
