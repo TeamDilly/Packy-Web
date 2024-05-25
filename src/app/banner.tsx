@@ -3,24 +3,10 @@ import Image from 'next/image'
 import BoxButton from '@/components/ui/box-button'
 
 export default function Banner() {
-  const googlePlayStoreUrl = 'https://play.google.com/store/apps/details?id=com.packy&hl=ko'
-  const appStoreUrl = 'https://apps.apple.com/kr/app/%ED%8C%A8%ED%82%A4/id6477327987'
+  const appSampleUrl = 'https://3bs72.app.link/sample-link'
 
   const handleClick = () => {
-    if (typeof navigator !== 'undefined') {
-      const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera
-
-      if (/android/i.test(userAgent)) {
-        console.log('android')
-        window.location.href = googlePlayStoreUrl
-      } else if (/iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream) {
-        console.log('ios')
-        window.location.href = appStoreUrl
-      } else {
-        console.log('others')
-        window.location.href = appStoreUrl
-      }
-    }
+    window.location.href = appSampleUrl
   }
 
   return (
