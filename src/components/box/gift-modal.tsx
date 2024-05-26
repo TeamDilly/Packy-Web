@@ -30,7 +30,7 @@ export default function GiftModal({ giftUrl, isOpen, onClose, openFull }: GiftMo
             fill
             sizes='63vw'
             style={{
-              objectFit: 'none',
+              objectFit: 'cover',
               zIndex: 100,
               objectPosition: 'top',
             }}
