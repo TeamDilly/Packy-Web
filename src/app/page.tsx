@@ -1,5 +1,5 @@
 'use client'
-import { Suspense, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import BoxDetail from '@/app/detail'
 import Banner from '@/app/banner'
 import Timer from '@/app/timer'
@@ -44,10 +44,24 @@ function Box({ id, opened, onOpenClick, onOpenComplete }: BoxProps) {
   )
 }
 
-export default function Page({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
-  const id = searchParams['box']
-  if (typeof id !== 'string') notFound()
+interface Params {
+  [key: string]: string
+}
+
+export default function Page() {
+  const [params, setParams] = useState<Params>({})
   const [opened, setOpened] = useState<BoxStatus>('closed')
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search)
+    const paramsObject: Params = {}
+    searchParams.forEach((value, key) => {
+      paramsObject[key] = value
+    })
+    setParams(paramsObject)
+  }, [])
+
+  const id: string | undefined = params['box']
 
   const onOpenClick = () => {
     setOpened('fading')
@@ -58,7 +72,7 @@ export default function Page({ searchParams }: { searchParams: { [key: string]: 
   return (
     <div className='container'>
       <Suspense fallback={<Loading />}>
-        <Box id={id} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />
+        {id !== undefined && <Box id={id} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />}
       </Suspense>
     </div>
   )
