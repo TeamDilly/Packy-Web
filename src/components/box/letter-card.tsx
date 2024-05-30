@@ -17,7 +17,7 @@ export default function LetterCard({
     <button type='button' className={cn(className, 'relative')} onClick={onClick}>
       <div
         className={
-          'font-b6 absolute inset-0 h-[87.5%] w-[87.5%] overflow-hidden rounded-lg bg-white px-2.5 py-1.5 text-gray-900'
+          'font-b6 absolute inset-0 h-[87.5%] w-[87.5%] overflow-hidden rounded-lg bg-white px-2.5 py-1.5 text-left text-gray-900'
         }
       >
         {letterContent}
