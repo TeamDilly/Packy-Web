@@ -3,8 +3,8 @@ import './globals.css'
 import 'react-responsive-modal/styles.css'
 import localFont from 'next/font/local'
 
-const myFont = localFont({
-  src: '../font/PretendardVariable.woff2',
+const pretendard = localFont({
+  src: '../font/PretendardVariable.ttf',
   display: 'swap',
 })
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang='ko' className={myFont.className}>
+    <html lang='ko' className={pretendard.className}>
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
