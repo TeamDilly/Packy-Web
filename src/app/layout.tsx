@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 import 'react-responsive-modal/styles.css'
 import localFont from 'next/font/local'
+import GoogleAnalytics from '@/app/google-analytics'
 
 const pretendard = localFont({
   src: '../font/PretendardVariable.ttf',
@@ -19,7 +20,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
-      <body>{children}</body>
+      <body>
+        <GoogleAnalytics />
+        {children}
+      </body>
     </html>
   )
 }
