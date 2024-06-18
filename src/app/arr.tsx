@@ -1,16 +1,14 @@
 import Image from 'next/image'
-import BoxButton from '@/components/ui/box-button'
-import { MouseEventHandler } from 'react'
 import { GiftBoxResponse } from '@/lib/types'
 import { cn } from '@/lib/util'
+import BoxArrButton from '@/components/box/arr/button'
 
-type BoxArrProps = { box: GiftBoxResponse; onOpenClick: MouseEventHandler; opened: 'closed' | 'fading' }
+type BoxArrProps = { box: GiftBoxResponse }
 
-export default function BoxArr({ box, onOpenClick, opened }: BoxArrProps) {
+export default function BoxArr({ box }: BoxArrProps) {
   return (
     <div
       className={cn(
-        { 'item-fadeout': opened === 'fading' },
         'item-fadein container relative mx-auto flex h-[calc(100dvh-4rem)] flex-col items-center justify-between px-6 py-4',
       )}
     >
@@ -30,15 +28,7 @@ export default function BoxArr({ box, onOpenClick, opened }: BoxArrProps) {
           <Image src={box.box.boxNormal} alt='선물박스' layout='responsive' width={300} height={300} priority />
         </div>
       </div>
-      <BoxButton
-        buttonType='rect'
-        size='l'
-        theme='dark'
-        className='flex w-full justify-center text-center'
-        onClick={onOpenClick}
-      >
-        열어보기
-      </BoxButton>
+      <BoxArrButton data={box} />
     </div>
   )
 }
