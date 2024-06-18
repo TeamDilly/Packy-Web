@@ -1,15 +1,17 @@
 'use client'
 import { Suspense, useEffect, useState } from 'react'
-import BoxDetail from '@/app/detail'
-import Banner from '@/app/banner'
-import Timer from '@/app/timer'
-import BoxArr from '@/app/arr'
-import OpenMotion from '@/app/open-motion'
+import dynamic from 'next/dynamic'
 import { useBox } from '@/lib/fetchers'
-import BoxExpired from '@/app/expired'
 import { GIFTBOX_NOT_FOUND, GIFTBOX_URL_EXPIRED } from '@/lib/types'
 import { notFound } from 'next/navigation'
 import Loading from '@/app/loading'
+
+const BoxDetail = dynamic(() => import('@/app/detail'))
+const Banner = dynamic(() => import('@/app/banner'))
+const Timer = dynamic(() => import('@/app/timer'))
+const BoxArr = dynamic(() => import('@/app/arr'))
+const OpenMotion = dynamic(() => import('@/app/open-motion'))
+const BoxExpired = dynamic(() => import('@/app/expired'))
 
 type BoxStatus = 'closed' | 'opening' | 'opened' | 'fading'
 
