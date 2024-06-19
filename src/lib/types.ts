@@ -244,14 +244,14 @@ export interface DataResponseDtoSliceResponseDtoLetterResponse {
 
 export interface EnvelopeResponse {
   /** @example "www.example.com" */
-  imgUrl?: string
+  imgUrl: string
   /** @example "ED76A5" */
-  borderColorCode?: string
+  borderColorCode: string
   /**
    * @format int32
    * @example 30
    */
-  opacity?: number
+  opacity: number
 }
 
 export interface LetterResponse {
@@ -279,9 +279,9 @@ export interface DataResponseDtoSliceResponseDtoItemResponse {
 
 export interface GiftResponse {
   /** @example "photo" */
-  type?: string
+  type: string
   /** @example "www.example.com" */
-  url?: string
+  url: string
 }
 
 export interface ItemResponse {
@@ -336,13 +336,13 @@ export interface BoxResponse {
    * @format int64
    * @example 1
    */
-  id?: number
+  id: number
   /** @example "www.example.com" */
-  boxNormal?: string
+  boxNormal: string
   /** @example "www.example.com" */
-  boxTop?: string
+  boxTop: string
   /** @example "www.example.com" */
-  boxLottie?: string
+  boxLottie: string
 }
 
 export interface DataResponseDtoGiftBoxResponse {
@@ -353,38 +353,38 @@ export interface DataResponseDtoGiftBoxResponse {
 
 export interface GiftBoxResponse {
   /** @example "오늘을 위한 특별한 생일 선물" */
-  name?: string
+  name: string
   /** @example "제이" */
-  senderName?: string
+  senderName: string
   /** @example "밀리밀리밀리" */
-  receiverName?: string
-  box?: BoxResponse
-  envelope?: EnvelopeResponse
+  receiverName: string
+  box: BoxResponse
+  envelope: EnvelopeResponse
   /** @example "생일 축하해~" */
-  letterContent?: string
+  letterContent: string
   /** @example "https://www.youtube.com" */
-  youtubeUrl?: string
-  photos?: PhotoResponse[]
-  stickers?: StickerResponse[]
-  gift?: GiftResponse
+  youtubeUrl: string
+  photos: PhotoResponse[]
+  stickers: StickerResponse[]
+  gift: GiftResponse
 }
 
 export interface PhotoResponse {
   /** @example "www.example.com" */
-  photoUrl?: string
+  photoUrl: string
   /** @example "우리 같이 트리 만든 날 :)" */
-  description?: string
+  description: string
   /**
    * @format int32
    * @example 1
    */
-  sequence?: number
+  sequence: number
 }
 
 export interface StickerResponse {
-  imgUrl?: string
+  imgUrl: string
   /** @format int32 */
-  location?: number
+  location: number
 }
 
 export interface DataResponseDtoKakaoImgResponse {

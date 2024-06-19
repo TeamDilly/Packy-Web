@@ -19,8 +19,8 @@ export function useBox(id: string) {
   }
 }
 
-export function useLottie(url: string) {
-  const { data, error, isLoading } = useSWR<JSON, Error>('/admin/design/Box_motion/arr/Box_motion_arr_1.json', fetcher)
+export function useLottie(path: string) {
+  const { data, error, isLoading } = useSWR<JSON, Error>(path, fetcher)
 
   return {
     data: data,

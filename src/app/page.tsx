@@ -27,7 +27,7 @@ function Box({ id, opened, onOpenClick, onOpenComplete }: BoxProps) {
 
   if (data?.data === undefined) throw new Error()
 
-  return <BoxContainer data={data} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />
+  return <BoxContainer data={data.data} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />
 }
 
 export default function Page() {
