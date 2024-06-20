@@ -22,6 +22,8 @@ jobs:
     - name: Yarn Deploy
       env:
         NEXT_PUBLIC_API_URL: ${{ secrets.API_URL_PROD }}
+        NEXT_PUBLIC_GOOGLE_ID: ${{ secrets. GOOGLE_ID_PROD }}
+        NEXT_PUBLIC_S3_URL: ${{ secrets.S3_URL }}
       run: |
         npm install -g yarn
         yarn install --frozen-lockfile
