@@ -20,7 +20,7 @@ export function useBox(id: string) {
 }
 
 export function useLottie(path: string) {
-  const { data, error, isLoading } = useSWR<JSON, Error>(path, fetcher)
+  const { data, error, isLoading } = useSWR<JSON, Error>(`${process.env.NEXT_PUBLIC_S3_URL}/${path}`, fetcher)
 
   return {
     data: data,
