@@ -14,10 +14,11 @@ export default function Banner() {
       <div className='flex space-x-2'>
         <Image
           className='rounded-lg'
-          src='/icons/Icon-marketing-1024x1024.webp'
+          src='/icons/Icon-40x40@3x.webp'
           alt='패키 앱 아이콘'
           width={40}
           height={40}
+          priority
         />
         <div className='flex flex-col text-nowrap '>
           <p className='font-b6 text-gray-700'>선물박스 평생 보관하려면?</p>

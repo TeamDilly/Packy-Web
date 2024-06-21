@@ -31,6 +31,10 @@ module.exports = (phase, { defaultConfig }) => {
             source: '/api/:path*',
             destination: `https://dev.packyforyou.shop/api/:path*`,
           },
+          {
+            source: '/admin/:path*',
+            destination: `https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/:path*`,
+          },
         ]
       },
     }

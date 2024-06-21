@@ -1,6 +1,7 @@
 import Modal from 'react-responsive-modal'
 import Image from 'next/image'
 import BoxButton from '@/components/ui/box-button'
+import GiftFrame from '@/components/box/gift-frame'
 
 type GiftModalProps = {
   giftUrl: string
@@ -18,12 +19,11 @@ export default function GiftModal({ giftUrl, isOpen, onClose, openFull }: GiftMo
       showCloseIcon={false}
       styles={{
         overlay: { backgroundColor: '#222222' },
-        modal: { margin: '2.5rem', padding: 0, overflow: 'visible' },
+        modal: { backgroundColor: '#222222', margin: 0, padding: 0, overflow: 'visible', boxShadow: 'none' },
       }}
     >
-      <div className='font-b4 relative flex flex-col bg-gray-950 p-5'>
-        <div className='absolute left-1/2 top-0 h-[16vw] w-[16vw] -translate-x-1/2 -translate-y-1/4 transform rounded-full bg-gray-950' />
-        <div className='relative h-[63vw] w-[63vw]'>
+      <GiftFrame>
+        <div className='relative h-full w-full'>
           <Image
             src={giftUrl}
             alt='선물 기프트카드'
@@ -45,8 +45,7 @@ export default function GiftModal({ giftUrl, isOpen, onClose, openFull }: GiftMo
             이미지 전체보기
           </BoxButton>
         </div>
-        <div className='absolute bottom-0 left-1/2 h-[16vw] w-[16vw] -translate-x-1/2 translate-y-1/4 transform rounded-full bg-gray-950' />
-      </div>
+      </GiftFrame>
     </Modal>
   )
 }

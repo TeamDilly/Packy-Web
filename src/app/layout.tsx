@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import 'react-responsive-modal/styles.css'
-import localFont from 'next/font/local'
+import GoogleAnalytics from '@/app/google-analytics'
 
-const myFont = localFont({
-  src: '../font/PretendardVariable.woff2',
-  display: 'swap',
-})
+// const pretendard = localFont({
+//   src: '../font/PretendardVariable.ttf',
+//   display: 'swap',
+// })
 
 export const metadata: Metadata = {
   title: '패키',
@@ -15,11 +15,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang='ko' className={myFont.className}>
+    <html lang='ko'>
       <head>
         <link rel='icon' href='/favicon.ico' sizes='any' />
       </head>
-      <body>{children}</body>
+      <body>
+        <GoogleAnalytics />
+        {children}
+      </body>
     </html>
   )
 }

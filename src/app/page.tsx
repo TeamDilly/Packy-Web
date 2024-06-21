@@ -1,17 +1,13 @@
 'use client'
 import { Suspense, useEffect, useState } from 'react'
-import BoxDetail from '@/app/detail'
-import Banner from '@/app/banner'
-import Timer from '@/app/timer'
-import BoxArr from '@/app/arr'
-import OpenMotion from '@/app/open-motion'
+import dynamic from 'next/dynamic'
 import { useBox } from '@/lib/fetchers'
-import BoxExpired from '@/app/expired'
-import { GIFTBOX_NOT_FOUND, GIFTBOX_URL_EXPIRED } from '@/lib/types'
+import { BoxStatus, GIFTBOX_NOT_FOUND, GIFTBOX_URL_EXPIRED } from '@/lib/types'
 import { notFound } from 'next/navigation'
 import Loading from '@/app/loading'
+import BoxContainer from '@/app/box-container'
 
-type BoxStatus = 'closed' | 'opening' | 'opened' | 'fading'
+const BoxExpired = dynamic(() => import('@/app/expired'))
 
 type BoxProps = {
   id: string
@@ -24,37 +20,23 @@ function Box({ id, opened, onOpenClick, onOpenComplete }: BoxProps) {
   const { data, isLoading, error } = useBox(id)
 
   if (isLoading) return <Loading />
-  if (data === undefined || error) throw error
+  if (error) throw error
 
-  if (data.code === GIFTBOX_URL_EXPIRED) return <BoxExpired />
-  else if (data.code === GIFTBOX_NOT_FOUND) notFound()
+  if (data?.code === GIFTBOX_URL_EXPIRED) return <BoxExpired />
+  else if (data?.code === GIFTBOX_NOT_FOUND) notFound()
 
-  if (data.data === undefined) throw new Error()
+  if (data?.data === undefined) throw new Error()
 
-  return (
-    <>
-      {opened === 'opened' && <Timer />}
-      <Banner />
-      {opened === 'opened' && <BoxDetail box={data.data} />}
-      {(opened === 'opening' || opened === 'fading') && <OpenMotion onComplete={onOpenComplete} />}
-      {(opened === 'closed' || opened === 'fading') && data && (
-        <BoxArr box={data.data} onOpenClick={onOpenClick} opened={opened} />
-      )}
-    </>
-  )
-}
-
-interface Params {
-  [key: string]: string
+  return <BoxContainer data={data.data} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />
 }
 
 export default function Page() {
-  const [params, setParams] = useState<Params>({})
+  const [params, setParams] = useState<Record<string, string>>({})
   const [opened, setOpened] = useState<BoxStatus>('closed')
 
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search)
-    const paramsObject: Params = {}
+    const paramsObject: Record<string, string> = {}
     searchParams.forEach((value, key) => {
       paramsObject[key] = value
     })
@@ -72,7 +54,7 @@ export default function Page() {
   return (
     <div className='container'>
       <Suspense fallback={<Loading />}>
-        {id !== undefined && <Box id={id} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />}
+        {id && <Box id={id} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />}
       </Suspense>
     </div>
   )
