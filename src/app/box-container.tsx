@@ -13,7 +13,6 @@ type BoxContainerProps = {
 
 const BoxDetail = dynamic(() => import('@/app/detail'))
 const Banner = dynamic(() => import('@/app/banner'))
-const Timer = dynamic(() => import('@/app/timer'))
 const BoxArr = dynamic(() => import('@/app/arr'))
 
 export default function BoxContainer({ data, opened, onOpenClick, onOpenComplete }: BoxContainerProps) {
@@ -27,7 +26,6 @@ export default function BoxContainer({ data, opened, onOpenClick, onOpenComplete
 
   return (
     <>
-      {opened === 'opened' && <Timer />}
       <Banner />
       {opened === 'opened' && <BoxDetail box={data} />}
       {(opened === 'opening' || opened === 'fading') && (
