@@ -68,23 +68,30 @@ export default function BoxDetail({ box }: { box: GiftBoxResponse }) {
         isOpen={modalStatus === 'letter'}
         onClose={closeModal}
       />
-      <GiftModal
-        giftUrl={box.gift.url}
-        isOpen={modalStatus === 'gift' || modalStatus === 'gift-full'}
-        onClose={closeModal}
-        openFull={() => openModal('gift-full')}
-      />
-      <GiftFullModal giftUrl={box.gift.url} isOpen={modalStatus === 'gift-full'} onClose={() => openModal('gift')} />
       {box.gift?.url && (
-        <BoxButton
-          buttonType='round'
-          size='m'
-          theme='light'
-          onClick={() => openModal('gift')}
-          className='absolute bottom-5 left-1/2 z-50 -translate-x-1/2 transform bg-white'
-        >
-          선물 확인하기
-        </BoxButton>
+        <>
+          <GiftModal
+            giftUrl={box.gift.url}
+            isOpen={modalStatus === 'gift' || modalStatus === 'gift-full'}
+            onClose={closeModal}
+            openFull={() => openModal('gift-full')}
+          />
+          <GiftFullModal
+            giftUrl={box.gift.url}
+            isOpen={modalStatus === 'gift-full'}
+            onClose={() => openModal('gift')}
+          />
+
+          <BoxButton
+            buttonType='round'
+            size='m'
+            theme='light'
+            onClick={() => openModal('gift')}
+            className='absolute bottom-5 left-1/2 z-50 -translate-x-1/2 transform bg-white'
+          >
+            선물 확인하기
+          </BoxButton>
+        </>
       )}
     </>
   )
