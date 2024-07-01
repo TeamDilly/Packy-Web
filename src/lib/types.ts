@@ -1394,4 +1394,5 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
 
 export const GIFTBOX_URL_EXPIRED = 'GIFTBOX_URL_EXPIRED'
 export const GIFTBOX_NOT_FOUND = 'GIFTBOX_NOT_FOUND'
+export const GIFTBOX_ALREADY_OPENED = 'GIFTBOX_ALREADY_OPENED'
 export type BoxStatus = 'closed' | 'opening' | 'opened' | 'fading'

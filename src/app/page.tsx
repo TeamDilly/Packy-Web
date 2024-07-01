@@ -2,12 +2,13 @@
 import { Suspense, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useBox } from '@/lib/fetchers'
-import { BoxStatus, GIFTBOX_NOT_FOUND, GIFTBOX_URL_EXPIRED } from '@/lib/types'
+import { BoxStatus, GIFTBOX_ALREADY_OPENED, GIFTBOX_NOT_FOUND, GIFTBOX_URL_EXPIRED } from '@/lib/types'
 import { notFound } from 'next/navigation'
 import Loading from '@/app/loading'
 import BoxContainer from '@/app/box-container'
 
 const BoxExpired = dynamic(() => import('@/app/expired'))
+const BoxOpened = dynamic(() => import('@/app/opened'))
 
 type BoxProps = {
   id: string
@@ -23,6 +24,7 @@ function Box({ id, opened, onOpenClick, onOpenComplete }: BoxProps) {
   if (error) throw error
 
   if (data?.code === GIFTBOX_URL_EXPIRED) return <BoxExpired />
+  else if (data?.code === GIFTBOX_ALREADY_OPENED) return <BoxOpened />
   else if (data?.code === GIFTBOX_NOT_FOUND) notFound()
 
   if (data?.data === undefined) throw new Error()
