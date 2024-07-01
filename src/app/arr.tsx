@@ -28,7 +28,7 @@ export default function BoxArr({ box, onOpenClick, opened }: BoxArrProps) {
 
         <div className='flex w-[64%] justify-center'>
           {box.box?.boxNormal && (
-            <Image src={box.box.boxNormal} alt='선물박스' layout='responsive' width={300} height={300} priority />
+            <Image src={box.box.boxNormal} alt='선물박스' layout='responsive' width={500} height={500} priority />
           )}
         </div>
       </div>
