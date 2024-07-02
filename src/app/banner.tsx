@@ -3,7 +3,7 @@ import Image from 'next/image'
 import BoxButton from '@/components/ui/box-button'
 
 export default function Banner() {
-  const appSampleUrl = 'https://3bs72.app.link/sample-link'
+  const appSampleUrl = 'https://3bs72.app.link/e/W2KMClQ2XJb'
 
   const handleClick = () => {
     window.location.href = appSampleUrl
