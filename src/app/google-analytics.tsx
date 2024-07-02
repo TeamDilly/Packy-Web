@@ -4,7 +4,6 @@ import Script from 'next/script'
 import * as gtag from '@/lib/gtag'
 
 const GoogleAnalytics = () => {
-  console.log('Google Analytics', gtag.NEXT_PUBLIC_GOOGLE_ID)
   return (
     <>
       <Script

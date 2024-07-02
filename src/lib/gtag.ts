@@ -1,4 +1,4 @@
-export const NEXT_PUBLIC_GOOGLE_ID = process.env.NEXT_PUBLIC_GA_ID
+export const NEXT_PUBLIC_GOOGLE_ID = process.env.NEXT_PUBLIC_GOOGLE_ID
 
 // https://developers.google.com/analytics/devguides/collection/gtagjs/pages
 export const pageview = (url: URL) => {
