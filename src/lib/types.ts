@@ -336,7 +336,7 @@ export interface BoxResponse {
    * @format int64
    * @example 1
    */
-  id: number
+  id: string
   /** @example "www.example.com" */
   boxNormal: string
   /** @example "www.example.com" */
@@ -349,6 +349,14 @@ export interface DataResponseDtoGiftBoxResponse {
   code?: string
   message?: string
   data?: GiftBoxResponse
+}
+
+export interface DataResponseBranch {
+  code: string
+  message: string
+  data: {
+    url: string
+  }
 }
 
 export interface GiftBoxResponse {
@@ -930,7 +938,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/v1/giftboxes/{giftBoxId}
      * @secure
      */
-    openGiftBox: (giftBoxId: number, params: RequestParams = {}) =>
+    openGiftBox: (giftBoxId: string, params: RequestParams = {}) =>
       this.request<DataResponseDtoGiftBoxResponse, void>({
         path: `/api/v1/giftboxes/${giftBoxId}`,
         method: 'GET',
@@ -947,7 +955,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request DELETE:/api/v1/giftboxes/{giftBoxId}
      * @secure
      */
-    deleteGiftBox: (giftBoxId: number, params: RequestParams = {}) =>
+    deleteGiftBox: (giftBoxId: string, params: RequestParams = {}) =>
       this.request<DataResponseDtoString, void>({
         path: `/api/v1/giftboxes/${giftBoxId}`,
         method: 'DELETE',
@@ -964,7 +972,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request PATCH:/api/v1/giftboxes/{giftBoxId}
      * @secure
      */
-    updateDeliverStatus: (giftBoxId: number, data: DeliverStatusRequest, params: RequestParams = {}) =>
+    updateDeliverStatus: (giftBoxId: string, data: DeliverStatusRequest, params: RequestParams = {}) =>
       this.request<DataResponseDtoString, void>({
         path: `/api/v1/giftboxes/${giftBoxId}`,
         method: 'PATCH',
@@ -1111,7 +1119,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      * @request GET:/api/v1/giftboxes/{giftBoxId}/kakao-image
      * @secure
      */
-    getKakaoMessageImgUrl: (giftBoxId: number, params: RequestParams = {}) =>
+    getKakaoMessageImgUrl: (giftBoxId: string, params: RequestParams = {}) =>
       this.request<DataResponseDtoKakaoImgResponse, void>({
         path: `/api/v1/giftboxes/${giftBoxId}/kakao-image`,
         method: 'GET',
