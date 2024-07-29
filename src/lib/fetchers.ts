@@ -43,7 +43,7 @@ export function useLottie(path: string) {
 
 export function useBranch(id: string) {
   const { trigger, data, error, isMutating } = useSWRMutation(
-    `${process.env.NEXT_PUBLIC_API_URL}/auth/sign-up`,
+    `${process.env.NEXT_PUBLIC_API_URL}/admin/branch`,
     sendRequest,
   )
 
