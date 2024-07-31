@@ -3,7 +3,6 @@ import { useBranch, useLottie } from '@/lib/fetchers'
 import dynamic from 'next/dynamic'
 import Loading from '@/app/loading'
 import OpenMotion from '@/app/open-motion'
-import { useEffect } from 'react'
 
 type BoxContainerProps = {
   id: string
@@ -22,11 +21,7 @@ export default function BoxContainer({ id, data, opened, onOpenClick, onOpenComp
   const path = urlObj.pathname
   const { data: lottieData, error: lottieError, isLoading: lottieLoading } = useLottie(path)
   const { data: branchData, error: branchError, isLoading: branchLoading } = useBranch(id)
-  useEffect(() => {
-    if (branchLoading) {
-      console.log('branchData', branchData)
-    }
-  }, [branchData, branchLoading])
+
   if (data.box === undefined) throw new Error()
   if (lottieLoading || branchLoading) return <Loading />
   if (lottieError || !lottieData) throw new Error('Failed to load lottie data')
@@ -34,7 +29,7 @@ export default function BoxContainer({ id, data, opened, onOpenClick, onOpenComp
 
   return (
     <>
-      <Banner />
+      <Banner branchUrl={branchData.data.url} />
       {opened === 'opened' && <BoxDetail box={data} />}
       {(opened === 'opening' || opened === 'fading') && (
         <OpenMotion lottieData={lottieData} opened={opened} onComplete={onOpenComplete} />

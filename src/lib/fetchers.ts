@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { DataResponseDtoGiftBoxResponse } from '@/lib/types'
+import { DataResponseBranch, DataResponseDtoGiftBoxResponse } from '@/lib/types'
 import useSWRMutation from 'swr/mutation'
 import { useEffect } from 'react'
 
@@ -42,7 +42,7 @@ export function useLottie(path: string) {
 }
 
 export function useBranch(id: string) {
-  const { trigger, data, error, isMutating } = useSWRMutation(
+  const { trigger, data, error, isMutating } = useSWRMutation<DataResponseBranch, Error, any, any>(
     `${process.env.NEXT_PUBLIC_API_URL}/admin/branch`,
     sendRequest,
   )

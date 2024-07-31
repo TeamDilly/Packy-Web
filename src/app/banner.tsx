@@ -2,11 +2,9 @@
 import Image from 'next/image'
 import BoxButton from '@/components/ui/box-button'
 
-export default function Banner() {
-  const appSampleUrl = 'https://3bs72.app.link/4apie2f5TKb'
-
+export default function Banner({ branchUrl }: { branchUrl: string }) {
   const handleClick = () => {
-    window.location.href = appSampleUrl
+    window.location.href = branchUrl
   }
 
   return (
