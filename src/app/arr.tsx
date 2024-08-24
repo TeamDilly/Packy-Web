@@ -21,9 +21,7 @@ export default function BoxArr({ box, onOpenClick, opened }: BoxArrProps) {
             <br />
             선물박스가 도착했어요!
           </h1>
-          <div className='mt-4 rounded-full border border-gray-300 bg-gray-100 px-5 py-3 text-gray-900'>
-            {box.letterContent}
-          </div>
+          <div className='mt-4 rounded-full border border-gray-300 bg-gray-100 px-5 py-3 text-gray-900'>{box.name}</div>
         </div>
 
         <div className='flex w-[64%] justify-center'>
