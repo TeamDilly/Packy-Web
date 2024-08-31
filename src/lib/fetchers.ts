@@ -57,3 +57,23 @@ export function useBranch(id: string) {
     error: error,
   }
 }
+
+export function useAnnounce(id: string) {
+  const { data, error, isLoading } = useSWR<DataResponseDtoGiftBoxResponse, Error>(
+    `${process.env.NEXT_PUBLIC_API_URL}/giftboxes/web/${200}`,
+    fetcher,
+  )
+
+  const images = [
+    'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_1%401x.png',
+    'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_2%401x.png',
+    'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_3%401x.png',
+    'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_4%401x.png',
+  ]
+
+  return {
+    data: images,
+    isLoading,
+    error: error,
+  }
+}
