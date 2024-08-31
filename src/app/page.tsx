@@ -56,7 +56,7 @@ export default function Page() {
   const onOpenComplete = () => setOpened('opened')
 
   return (
-    <div className='container'>
+    <div className='mx-auto w-screen min-w-80'>
       <Suspense fallback={<Loading />}>
         {id && <Box id={id} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />}
       </Suspense>
