@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { DataResponseBranch, DataResponseDtoGiftBoxResponse } from '@/lib/types'
+import { DataResponseBranch, DataResponseDtoGiftBoxResponse, WebNoticeResponse } from '@/lib/types'
 import useSWRMutation from 'swr/mutation'
 import { useEffect } from 'react'
 
@@ -58,21 +58,14 @@ export function useBranch(id: string) {
   }
 }
 
-export function useAnnounce(id: string) {
-  const { data, error, isLoading } = useSWR<DataResponseDtoGiftBoxResponse, Error>(
-    `${process.env.NEXT_PUBLIC_API_URL}/giftboxes/web/${200}`,
+export function useNotice(id: string) {
+  const { data, error, isLoading } = useSWR<WebNoticeResponse, Error>(
+    `${process.env.NEXT_PUBLIC_API_URL}/admin/notices/web/${id}`,
     fetcher,
   )
 
-  const images = [
-    'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_1%401x.png',
-    'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_2%401x.png',
-    'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_3%401x.png',
-    'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/design/Box/Box_4%401x.png',
-  ]
-
   return {
-    data: images,
+    data: data,
     isLoading,
     error: error,
   }

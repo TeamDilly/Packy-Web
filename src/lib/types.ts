@@ -1,5 +1,6 @@
 /* eslint-disable */
 /* tslint:disable */
+
 /*
  * ---------------------------------------------------------------
  * ## THIS FILE WAS GENERATED VIA SWAGGER-TYPESCRIPT-API        ##
@@ -1398,6 +1399,21 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
         ...params,
       }),
   }
+}
+
+export type NoticeResponse = {
+  code: string
+  message: string
+  data: {
+    imgUrl: string
+    noticeUrl: string
+  }[]
+}
+
+export type WebNoticeResponse = {
+  code: string
+  message: string
+  data: string[]
 }
 
 export const GIFTBOX_URL_EXPIRED = 'GIFTBOX_URL_EXPIRED'
