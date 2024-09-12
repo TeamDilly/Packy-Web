@@ -58,4 +58,23 @@ jobs:
           tags: ${{ secrets.V2_ECR_URL }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Exporting nextjs build cache
+        uses: docker/build-push-action@v4
+        env:
+          DOCKER_BUILDKIT: 1
+          BUILDKIT_PROGRESS: plain
+        with:
+          context: .
+          file: Dockerfile
+          target: nextjs-cache
+          outputs: type=local,dest=.
+          push: false
+          tags: ${{ secrets.V2_ECR_URL }}
+          cache-from: type=gha
+
+      - name: Print nextjs cache directory after build
+        continue-on-error: true
+        run : |
+          ls -la ${{ github.workspace }}/.next/cache
         
