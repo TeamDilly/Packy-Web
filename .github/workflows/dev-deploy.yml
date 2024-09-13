@@ -5,39 +5,101 @@ on:
       - dev
 
 jobs:
-  Deploy:
+  Build-and-Push-docker-image:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Git Checkout
+        uses: actions/checkout@v3
+
+      - name: Generate env file
+        run: |
+          echo "NEXT_PUBLIC_API_URL=${{ secrets.API_URL }}" > .env
+          echo "NEXT_PUBLIC_S3_URL=${{ secrets.S3_URL }}" >> .env
+
+      - name: Cache nextjs build
+        uses: actions/cache@v3
+        id: yarn-cahce
+        with:
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
+      
+      - name: Print nextjs cache directory
+        continue-on-error: true
+        run : |
+          ls -la ${{ github.workspace }}/.next/cache
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.V2_AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.V2_AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build and push Docker image to Amazon ECR
+        uses: docker/build-push-action@v4
+        env:
+          DOCKER_BUILDKIT: 1
+          BUILDKIT_PROGRESS: plain
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          tags: ${{ secrets.V2_ECR_URL }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Exporting nextjs build cache
+        uses: docker/build-push-action@v4
+        env:
+          DOCKER_BUILDKIT: 1
+          BUILDKIT_PROGRESS: plain
+        with:
+          context: .
+          file: Dockerfile
+          target: nextjs-cache
+          outputs: type=local,dest=.
+          push: false
+          tags: ${{ secrets.V2_ECR_URL }}
+          cache-from: type=gha
+  
+      - name: Print nextjs cache directory after build
+        continue-on-error: true
+        run : |
+          ls -la ${{ github.workspace }}/.next/cache
+
+  Deploy-to-EC2:
+    needs: Build-and-Push-docker-image
     runs-on: ubuntu-latest
 
     steps:
-    - name: Git Checkout
-      uses: actions/checkout@v3
-
-    - name: Setup Node
-      uses: actions/setup-node@v4
-      with:
-        node-version: 18
-        cache: yarn
-        cache-dependency-path: yarn.lock
-
-    - name: Yarn Deploy
-      env:
-        NEXT_PUBLIC_API_URL: ${{ secrets.API_URL }}
-        NEXT_PUBLIC_S3_URL: ${{ secrets.S3_URL }}
-      run: |
-        npm install -g yarn
-        yarn install --frozen-lockfile
-        yarn build
-
     - name: Configure AWS Credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-access-key-id: ${{ secrets.V2_AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.V2_AWS_SECRET_ACCESS_KEY }}
         aws-region: ap-northeast-2
 
-    - name: Deploy to S3
-      run: aws s3 sync ./out s3://${{ secrets.S3_BUCKET_NAME }} --delete
-
-    - name: Clear Cache to CloudFront
-      run: aws cloudfront create-invalidation --distribution-id ${{ secrets.CLOUDFRONT_DISTRIBUTION_ID }} --paths "/*"
+    - name: Deploy to EC2
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.V2_EC2_HOST }}
+        username: ${{ secrets.V2_EC2_USERNAME }}
+        key: ${{ secrets.V2_EC2_KEY }}
+        script: |
+          docker ps -q --filter "publish=3000" | xargs --no-run-if-empty docker stop
+          docker ps -a -q --filter "publish=3000" | xargs --no-run-if-empty docker rm
+          aws ecr get-login-password --region ap-northeast-2 | sudo docker login --username AWS --password-stdin ${{ secrets.V2_ECR_URL }}
+          docker pull ${{ secrets.V2_ECR_URL }}:latest
+          docker run -d -p 3000:3000 ${{ secrets.V2_ECR_URL }}:latest
     
