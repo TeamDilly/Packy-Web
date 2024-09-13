@@ -101,5 +101,5 @@ jobs:
           docker ps -a -q --filter "publish=3001" | xargs --no-run-if-empty docker rm
           aws ecr get-login-password --region ap-northeast-2 | sudo docker login --username AWS --password-stdin ${{ secrets.V2_ECR_URL_PROD }}
           docker pull ${{ secrets.V2_ECR_URL_PROD }}:latest
-          docker run -d -p 3000:3000 ${{ secrets.V2_ECR_URL_PROD }}:latest
+          docker run -d -p 3001:3000 ${{ secrets.V2_ECR_URL_PROD }}:latest
     
