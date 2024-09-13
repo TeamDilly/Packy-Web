@@ -59,6 +59,25 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
+      - name: Exporting nextjs build cache
+        uses: docker/build-push-action@v4
+        env:
+          DOCKER_BUILDKIT: 1
+          BUILDKIT_PROGRESS: plain
+        with:
+          context: .
+          file: Dockerfile
+          target: nextjs-cache
+          outputs: type=local,dest=.
+          push: false
+          tags: ${{ secrets.V2_ECR_URL }}
+          cache-from: type=gha
+  
+      - name: Print nextjs cache directory after build
+        continue-on-error: true
+        run : |
+          ls -la ${{ github.workspace }}/.next/cache
+
   Deploy-to-EC2:
     needs: Build-and-Push-docker-image
     runs-on: ubuntu-latest
@@ -83,28 +102,4 @@ jobs:
           aws ecr get-login-password --region ap-northeast-2 | sudo docker login --username AWS --password-stdin ${{ secrets.V2_ECR_URL }}
           docker pull ${{ secrets.V2_ECR_URL }}:latest
           docker run -d -p 3000:3000 ${{ secrets.V2_ECR_URL }}:latest
-    
-  Cache-docker-image:
-    needs: Deploy-to-EC2
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Exporting nextjs build cache
-        uses: docker/build-push-action@v4
-        env:
-          DOCKER_BUILDKIT: 1
-          BUILDKIT_PROGRESS: plain
-        with:
-          context: .
-          file: Dockerfile
-          target: nextjs-cache
-          outputs: type=local,dest=.
-          push: false
-          tags: ${{ secrets.V2_ECR_URL }}
-          cache-from: type=gha
-
-      - name: Print nextjs cache directory after build
-        continue-on-error: true
-        run : |
-          ls -la ${{ github.workspace }}/.next/cache
         
