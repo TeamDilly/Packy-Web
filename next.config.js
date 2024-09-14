@@ -2,7 +2,7 @@ const { PHASE_DEVELOPMENT_SERVER } = require('next/constants')
 
 /** @type {import('next').NextConfig} */
 const config = {
-  output: 'export',
+  output: 'standalone',
   images: {
     remotePatterns: [
       {
