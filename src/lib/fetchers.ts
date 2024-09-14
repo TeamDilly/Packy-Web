@@ -1,5 +1,6 @@
+'use client'
 import useSWR from 'swr'
-import { DataResponseBranch, DataResponseDtoGiftBoxResponse, WebNoticeResponse } from '@/lib/types'
+import { DataResponseBranch, DataResponseDtoGiftBoxResponse, NoticeResponse, WebNoticeResponse } from '@/lib/types'
 import useSWRMutation from 'swr/mutation'
 import { useEffect } from 'react'
 
@@ -72,43 +73,13 @@ export function useNotice(id: string) {
 }
 
 export function useNoticeList() {
-  // const { data, error, isLoading } = useSWR<NoticeResponse, Error>(
-  //   `${process.env.NEXT_PUBLIC_API_URL}/admin/notices`,
-  //   fetcher,
-  // )
-  const { data, error, isLoading } = useSWR<WebNoticeResponse, Error>(
-    `${process.env.NEXT_PUBLIC_API_URL}/admin/notices/web/${1}`,
+  const { data, error, isLoading } = useSWR<NoticeResponse, Error>(
+    `${process.env.NEXT_PUBLIC_API_URL}/admin/notices`,
     fetcher,
   )
 
-  const dummy = {
-    data: [
-      {
-        imgUrl:
-          'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/notice/%ED%8C%A8%ED%82%A4%EC%86%8C%EA%B0%9C/%E1%84%87%E1%85%A2%E1%84%82%E1%85%A5%402.png',
-        noticeUrl: 'https://www.naver.com/',
-      },
-
-      {
-        imgUrl:
-          'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/notice/%ED%8C%A8%ED%82%A4%EC%86%8C%EA%B0%9C/%E1%84%87%E1%85%A2%E1%84%82%E1%85%A5%402.png',
-        noticeUrl: 'https://www.naver.com/',
-      },
-      {
-        imgUrl:
-          'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/notice/%ED%8C%A8%ED%82%A4%EC%86%8C%EA%B0%9C/%E1%84%87%E1%85%A2%E1%84%82%E1%85%A5%402.png',
-        noticeUrl: 'https://www.naver.com/',
-      },
-      {
-        imgUrl:
-          'https://packy-bucket.s3.ap-northeast-2.amazonaws.com/admin/notice/%ED%8C%A8%ED%82%A4%EC%86%8C%EA%B0%9C/%E1%84%87%E1%85%A2%E1%84%82%E1%85%A5%402.png',
-        noticeUrl: 'https://www.naver.com/',
-      },
-    ],
-  }
-
   return {
-    data: dummy,
+    data: data,
     isLoading,
     error: error,
   }
