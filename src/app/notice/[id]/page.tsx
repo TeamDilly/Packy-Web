@@ -1,3 +1,4 @@
+'use client'
 import { useNotice } from '@/lib/fetchers'
 import Loading from '@/app/loading'
 import Image from 'next/image'
