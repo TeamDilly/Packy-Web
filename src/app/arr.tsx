@@ -3,6 +3,7 @@ import BoxButton from '@/components/ui/box-button'
 import { MouseEventHandler } from 'react'
 import { GiftBoxResponse } from '@/lib/types'
 import { cn } from '@/lib/util'
+import ShakingComponent from '@/components/animation/shaking-animation'
 
 type BoxArrProps = { box: GiftBoxResponse; onOpenClick: MouseEventHandler; opened: 'closed' | 'fading' }
 
@@ -24,11 +25,11 @@ export default function BoxArr({ box, onOpenClick, opened }: BoxArrProps) {
           <div className='mt-4 rounded-full border border-gray-300 bg-gray-100 px-5 py-3 text-gray-900'>{box.name}</div>
         </div>
 
-        <div className='flex w-[64%] justify-center'>
+        <ShakingComponent className='flex w-[64%] justify-center'>
           {box.box?.boxNormal && (
             <Image src={box.box.boxNormal} alt='선물박스' layout='responsive' width={500} height={500} priority />
           )}
-        </div>
+        </ShakingComponent>
       </div>
       <BoxButton
         buttonType='rect'
