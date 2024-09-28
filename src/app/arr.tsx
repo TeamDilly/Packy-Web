@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import BoxButton from '@/components/ui/box-button'
 import { MouseEventHandler } from 'react'
-import { GiftBoxResponse } from '@/lib/types'
+import { GiftBoxResponse } from '@/lib/api'
 import { cn } from '@/lib/util'
 import ShakingComponent from '@/components/animation/shaking-animation'
 

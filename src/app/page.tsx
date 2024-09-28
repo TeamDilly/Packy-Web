@@ -3,9 +3,11 @@ import { Suspense, useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import { useBox } from '@/lib/fetchers'
 import { BoxStatus, GIFTBOX_ALREADY_OPENED, GIFTBOX_NOT_FOUND, GIFTBOX_URL_EXPIRED } from '@/lib/types'
-import { notFound } from 'next/navigation'
+import { notFound, useRouter } from 'next/navigation'
 import Loading from '@/app/loading'
 import BoxContainer from '@/app/box-container'
+import { ErrorBoundary, FallbackProps } from 'react-error-boundary'
+import Error from '@/app/error'
 
 const BoxExpired = dynamic(() => import('@/app/expired'))
 const BoxOpened = dynamic(() => import('@/app/opened'))
@@ -17,20 +19,33 @@ type BoxProps = {
   onOpenComplete: () => void
 }
 
-function Box({ id, opened, onOpenClick, onOpenComplete }: BoxProps) {
-  const { data, isLoading, error } = useBox(id)
+function BoxContent({ id, opened, onOpenClick, onOpenComplete }: BoxProps) {
+  const { data } = useBox(id)
 
-  if (isLoading) return <Loading />
-  if (error) throw error
+  return <BoxContainer id={id} data={data} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />
+}
 
-  if (data?.code === GIFTBOX_URL_EXPIRED) return <BoxExpired />
-  else if (data?.code === GIFTBOX_ALREADY_OPENED) return <BoxOpened />
-  else if (data?.code === GIFTBOX_NOT_FOUND) notFound()
+function ErrorFallback({ error, resetErrorBoundary }: FallbackProps) {
+  if (error.message === GIFTBOX_URL_EXPIRED) return <BoxExpired />
+  if (error.message === GIFTBOX_ALREADY_OPENED) return <BoxOpened />
+  if (error.message === GIFTBOX_NOT_FOUND) return notFound()
+  return <Error reset={resetErrorBoundary} />
+}
 
-  if (data?.data === undefined) throw new Error()
+function Box(props: BoxProps) {
+  const router = useRouter()
 
   return (
-    <BoxContainer id={id} data={data.data} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />
+    <ErrorBoundary
+      FallbackComponent={ErrorFallback}
+      onReset={() => {
+        router.refresh()
+      }}
+    >
+      <Suspense fallback={<Loading />}>
+        <BoxContent {...props} />
+      </Suspense>
+    </ErrorBoundary>
   )
 }
 
@@ -57,9 +72,7 @@ export default function Page() {
 
   return (
     <div className='mx-auto w-screen min-w-80'>
-      <Suspense fallback={<Loading />}>
-        {id && <Box id={id} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />}
-      </Suspense>
+      {id && <Box id={id} opened={opened} onOpenClick={onOpenClick} onOpenComplete={onOpenComplete} />}
     </div>
   )
 }

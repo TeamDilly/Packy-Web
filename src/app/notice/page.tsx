@@ -1,13 +1,10 @@
 'use client'
 import { useNoticeList } from '@/lib/fetchers'
 import Image from 'next/image'
-import Loading from '@/app/loading'
 import Link from 'next/link'
 
 export default function Page() {
-  const { data, isLoading, error } = useNoticeList()
-  if (isLoading) return <Loading />
-  if (error) throw new Error('Failed to load notice data')
+  const { data } = useNoticeList()
 
   return (
     <div className='flex h-screen flex-col items-center gap-3 overflow-auto bg-gray-100 p-4'>

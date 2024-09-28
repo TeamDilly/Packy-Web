@@ -1,5 +1,5 @@
 import Image from 'next/image'
-import { GiftBoxResponse, StickerResponse } from '@/lib/types'
+import { GiftBoxResponse, StickerResponse } from '@/lib/api'
 import PhotoCard from '@/components/box/photo-card'
 import Sticker from '@/components/box/sticker'
 import LetterCard from '@/components/box/letter-card'

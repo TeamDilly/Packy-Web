@@ -2,7 +2,7 @@
 
 import BoxButton from '@/components/ui/box-button'
 
-export default function Error({ error, reset }: { error: Error & { digest?: string }; reset: () => void }) {
+export default function Error({ reset }: { reset: () => void }) {
   return (
     <div className='container mx-auto flex h-dvh flex-col items-center justify-center space-y-4 px-4'>
       <div className='container mx-auto flex flex-col items-center space-y-1'>

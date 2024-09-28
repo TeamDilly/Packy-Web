@@ -1,86 +1,78 @@
 'use client'
 import useSWR from 'swr'
-import { DataResponseBranch, DataResponseDtoGiftBoxResponse, NoticeResponse, WebNoticeResponse } from '@/lib/types'
 import useSWRMutation from 'swr/mutation'
 import { useEffect } from 'react'
+import { Api } from '@/lib/api'
 
-const fetcher = async (...args: Parameters<typeof fetch>): Promise<any> => {
-  const response = await fetch(...args)
-  return response.json()
-}
-
-async function sendRequest(url: string, { arg }: { arg: any }) {
-  return fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(arg),
-  }).then(res => res.json())
-}
+const api = new Api({
+  baseUrl: process.env.NEXT_PUBLIC_API_URL as string,
+})
 
 export function useBox(id: string) {
-  const { data, error, isLoading } = useSWR<DataResponseDtoGiftBoxResponse, Error>(
-    `${process.env.NEXT_PUBLIC_API_URL}/giftboxes/web/${id}`,
-    fetcher,
-  )
+  const { data, error } = useSWR(['giftbox', id], () => api.api.openGiftBoxForWeb(id), {
+    suspense: true,
+    shouldRetryOnError: false,
+  })
 
-  return {
-    data: data,
-    isLoading,
-    error: error,
+  if (error) throw error
+
+  if (data?.code !== 'OK') {
+    throw new Error(data?.code)
   }
+
+  return { data: data?.data }
 }
 
 export function useLottie(path: string) {
-  const { data, error, isLoading } = useSWR<JSON, Error>(`${process.env.NEXT_PUBLIC_S3_URL}${path}`, fetcher)
+  const { data, error, isLoading } = useSWR<JSON, Error>(
+    ['lottie', path],
+    () => fetch(`${process.env.NEXT_PUBLIC_S3_URL}${path}`).then(res => res.json()),
+    { shouldRetryOnError: false },
+  )
 
   return {
-    data: data,
+    data: data as JSON,
     isLoading,
-    error: error,
+    error,
   }
 }
 
 export function useBranch(id: string) {
-  const { trigger, data, error, isMutating } = useSWRMutation<DataResponseBranch, Error, any, any>(
-    `${process.env.NEXT_PUBLIC_API_URL}/admin/branch`,
-    sendRequest,
+  const { trigger, data, error, isMutating } = useSWRMutation(['branch', id], () =>
+    api.api.createBranchUrl({ boxId: Number(id) }),
   )
 
   useEffect(() => {
-    trigger({ boxId: id })
+    if (id) {
+      trigger()
+    }
   }, [trigger, id])
 
   return {
     data: data,
     isLoading: isMutating,
-    error: error,
+    error,
   }
 }
 
 export function useNotice(id: string) {
-  const { data, error, isLoading } = useSWR<WebNoticeResponse, Error>(
-    `${process.env.NEXT_PUBLIC_API_URL}/admin/notices/web/${id}`,
-    fetcher,
-  )
+  const { data, error, isLoading } = useSWR(['notice', id], () => api.api.getNotice(Number(id)), {
+    shouldRetryOnError: false,
+  })
 
   return {
     data: data,
     isLoading,
-    error: error,
+    error,
   }
 }
 
 export function useNoticeList() {
-  const { data, error, isLoading } = useSWR<NoticeResponse, Error>(
-    `${process.env.NEXT_PUBLIC_API_URL}/admin/notices`,
-    fetcher,
-  )
+  const { data, error, isLoading } = useSWR('noticeList', () => api.api.getNotices(), { shouldRetryOnError: false })
 
   return {
     data: data,
     isLoading,
-    error: error,
+    error,
   }
 }
